@@ -38,10 +38,10 @@ onBeforeUnmount(() => window.removeEventListener('scroll', onScroll));
       <span class="brand-name">PlayStudy</span>
     </a>
     <div class="nav-links">
+      <a href="#why">Why</a>
       <a href="#features">Features</a>
       <a href="#how">How it works</a>
       <a href="#games">Games</a>
-      <a href="#game">Play</a>
     </div>
     <a class="btn btn-primary btn-sm" href="#download">Get the app</a>
   </motion.nav>
