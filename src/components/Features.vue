@@ -3,19 +3,19 @@ import { motion } from 'motion-v';
 
 const features = [
   {
-    color: '#007AFF',
+    color: '#FF6B1A',
     title: 'Smart Summary',
     desc: 'Long articles, dense PDFs and lecture notes compressed into the bits that actually matter.',
     kind: 'bars',
   },
   {
-    color: '#5856D6',
+    color: '#1E5EFF',
     title: 'Adaptive Quiz',
     desc: 'Multiple-choice questions tuned to the source material — instant feedback, no fluff.',
     kind: 'quiz',
   },
   {
-    color: '#22C55E',
+    color: '#FFB347',
     title: 'Guess the Word',
     desc: 'A flame-powered mini-game with letter tiles, lives and a confetti burst when you nail it.',
     kind: 'tiles',
@@ -39,7 +39,7 @@ const reveal = (i) => ({
       :transition="{ duration: 0.7, ease: [0.2, 0.8, 0.2, 1] }"
     >
       <span class="eyebrow">Why PlayStudy</span>
-      <h2>Three ways to learn, baked into every set.</h2>
+      <h2>Three ways to learn, <em>baked in</em>.</h2>
       <p>Each study set is built around how your brain actually remembers things — read, recall, play.</p>
     </motion.div>
 
@@ -88,7 +88,7 @@ const reveal = (i) => ({
 }
 .feature::before{
   content:"";position:absolute;inset:0;
-  background:radial-gradient(circle at 20% 0%, var(--c, #007AFF), transparent 60%);
+  background:radial-gradient(circle at 20% 0%, var(--c, #FF6B1A), transparent 60%);
   opacity:0;transition:opacity .5s;
 }
 .feature:hover{box-shadow:var(--shadow-2);border-color:transparent}

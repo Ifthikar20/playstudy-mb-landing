@@ -62,7 +62,7 @@ function burstConfetti() {
   canvas.width = r.width * devicePixelRatio;
   canvas.height = r.height * devicePixelRatio;
   ctx.scale(devicePixelRatio, devicePixelRatio);
-  const colors = ['#007AFF', '#5856D6', '#22C55E', '#FF9500', '#FF2D92'];
+  const colors = ['#FF6B1A', '#FF8A3D', '#1E5EFF', '#3E7BFF', '#FFB347'];
   const parts = Array.from({ length: 90 }, () => ({
     x: r.width / 2, y: r.height / 2,
     vx: (Math.random() - 0.5) * 10,
@@ -102,12 +102,12 @@ const fadeIn = {
     <div class="game-grid">
       <motion.div v-bind="fadeIn">
         <span class="eyebrow eyebrow-green">The Game</span>
-        <h2>Guess the Word — the part you'll actually look forward to.</h2>
+        <h2>Guess the Word — <em>the fun part</em>.</h2>
         <p class="lede">A flame-powered mini-game built into every study set. Six lives, animated letter tiles, confetti on a correct guess. Tap a letter to play.</p>
         <ul class="bullets">
-          <li><span style="background:#22C55E"></span> Animated tile reveals</li>
-          <li><span style="background:#5856D6"></span> 6 lives per round</li>
-          <li><span style="background:#007AFF"></span> Confetti on win 🎉</li>
+          <li><span style="background:#FF6B1A"></span> Animated tile reveals</li>
+          <li><span style="background:#1E5EFF"></span> 6 lives per round</li>
+          <li><span style="background:#FFB347"></span> Confetti on win 🎉</li>
         </ul>
       </motion.div>
 
@@ -151,7 +151,7 @@ const fadeIn = {
 <style scoped>
 .game-show{padding:60px 24px 120px;max-width:1240px;margin:0 auto}
 .game-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
-.eyebrow-green{color:var(--accent) !important}
+.eyebrow-green{color:var(--secondary) !important}
 h2{font-size:clamp(30px,3.6vw,44px);font-weight:800;letter-spacing:-.03em;line-height:1.1;margin:14px 0 16px}
 .lede{font-size:17px;color:var(--text-2);margin:0}
 .bullets{list-style:none;padding:0;margin:24px 0 0;display:flex;flex-direction:column;gap:10px}
@@ -171,14 +171,14 @@ h2{font-size:clamp(30px,3.6vw,44px);font-weight:800;letter-spacing:-.03em;line-h
   display:grid;place-items:center;font-weight:800;font-size:18px;color:var(--text);
   transition:background .35s, border-color .35s, color .35s;
 }
-.gt.revealed{background:var(--accent);border-color:var(--accent);color:#fff}
+.gt.revealed{background:linear-gradient(135deg,var(--primary),var(--primary-2));border-color:var(--primary);color:#fff}
 .game-keys{display:grid;grid-template-columns:repeat(9,1fr);gap:6px;margin-bottom:18px}
 .gk{
   background:var(--surface);padding:10px 0;text-align:center;font-weight:700;font-size:13px;border-radius:8px;
   transition:background .2s,color .2s;
 }
-.gk:not(:disabled):hover{background:var(--primary);color:#fff}
-.gk.correct{background:var(--accent);color:#fff}
+.gk:not(:disabled):hover{background:var(--secondary);color:#fff}
+.gk.correct{background:var(--primary);color:#fff}
 .gk.wrong{background:#fee2e2;color:#dc2626}
 .gk:disabled{opacity:.5;cursor:default}
 .gk.correct,.gk.wrong{opacity:1}

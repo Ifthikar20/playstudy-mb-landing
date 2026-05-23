@@ -37,8 +37,8 @@ const fadeUp = (delay = 0) => ({
           <span class="pill-dot"></span> New · AI-powered study sets
         </motion.span>
         <motion.h1 class="title" v-bind="fadeUp(0.15)">
-          Turn <span class="grad">anything</span><br/>
-          into a <span class="grad-2">study set</span>.
+          Turn anything into a <br/>
+          study set, <em>beautifully</em>.
         </motion.h1>
         <motion.p class="lede" v-bind="fadeUp(0.25)">
           Paste a link, drop a file, or type. PlayStudy spins up a <b>Summary</b>, a <b>Quiz</b>, and a <b>Guess-the-Word</b> mini-game in seconds — so learning actually sticks.
@@ -110,9 +110,9 @@ const fadeUp = (delay = 0) => ({
   position:absolute;border-radius:50%;filter:blur(60px);opacity:.55;z-index:-1;
   animation:float 14s ease-in-out infinite;
 }
-.blob-1{width:520px;height:520px;background:#007AFF;top:-120px;left:-120px}
-.blob-2{width:480px;height:480px;background:#5856D6;top:200px;right:-150px;animation-delay:-4s}
-.blob-3{width:380px;height:380px;background:#22C55E;bottom:-100px;left:30%;animation-delay:-8s;opacity:.35}
+.blob-1{width:520px;height:520px;background:#FF6B1A;top:-120px;left:-120px;opacity:.55}
+.blob-2{width:480px;height:480px;background:#1E5EFF;top:200px;right:-150px;animation-delay:-4s;opacity:.5}
+.blob-3{width:380px;height:380px;background:#FFB347;bottom:-100px;left:30%;animation-delay:-8s;opacity:.4}
 @keyframes float{
   0%,100%{transform:translate(0,0) scale(1)}
   33%{transform:translate(40px,-30px) scale(1.08)}
@@ -129,21 +129,29 @@ const fadeUp = (delay = 0) => ({
   display:inline-flex;align-items:center;gap:8px;
   padding:6px 12px 6px 10px;
   font-size:12.5px;font-weight:500;
-  background:rgba(0,122,255,.08);
+  background:rgba(255,107,26,.1);
   color:var(--primary);
-  border:1px solid rgba(0,122,255,.18);
+  border:1px solid rgba(255,107,26,.2);
   border-radius:999px;
   margin-bottom:24px;
 }
-.pill-dot{width:6px;height:6px;border-radius:50%;background:var(--primary);box-shadow:0 0 0 4px rgba(0,122,255,.18);animation:pulse 2s infinite}
-@keyframes pulse{50%{box-shadow:0 0 0 8px rgba(0,122,255,0)}}
+.pill-dot{width:6px;height:6px;border-radius:50%;background:var(--primary);box-shadow:0 0 0 4px rgba(255,107,26,.18);animation:pulse 2s infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 8px rgba(255,107,26,0)}}
 
 .title{
   font-size:clamp(44px,7vw,84px);
-  font-weight:800;
+  font-weight:700;
   line-height:1.02;
   letter-spacing:-.035em;
   margin:0 0 22px;
+}
+.title em{
+  font-family:var(--serif);
+  font-style:italic;
+  font-weight:400;
+  background:linear-gradient(120deg,#FF6B1A,#1E5EFF);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  letter-spacing:-.02em;
 }
 .lede{
   font-size:clamp(16px,1.4vw,18.5px);color:var(--text-2);
@@ -154,7 +162,7 @@ const fadeUp = (delay = 0) => ({
 .hero-stats{display:flex;gap:36px;margin-top:48px;flex-wrap:wrap}
 .hero-stats > div{display:flex;flex-direction:column}
 .hero-stats b{font-size:26px;font-weight:700;letter-spacing:-.02em;
-  background:linear-gradient(120deg,#007AFF,#5856D6);
+  background:linear-gradient(120deg,#FF6B1A,#1E5EFF);
   -webkit-background-clip:text;background-clip:text;color:transparent;}
 .hero-stats span{font-size:12.5px;color:var(--text-2)}
 .phone-wrap{position:relative;display:flex;justify-content:center;align-items:center;perspective:1400px}

@@ -13,7 +13,7 @@ import { motion } from 'motion-v';
     >
       <div class="cta-blob"></div>
       <div class="cta-blob cta-blob-2"></div>
-      <h2>Stop re-reading.<br/>Start playing.</h2>
+      <h2>Stop re-reading. <br/><em>Start playing.</em></h2>
       <p>PlayStudy is a free download. Bring any topic — leave with a study set that fits in your pocket.</p>
       <div class="cta-row">
         <motion.a class="btn btn-primary" href="#"
@@ -44,8 +44,8 @@ import { motion } from 'motion-v';
   isolation:isolate;
   box-shadow:var(--shadow-2);
 }
-.cta-blob{position:absolute;width:500px;height:500px;border-radius:50%;filter:blur(80px);z-index:-1;animation:float 10s ease-in-out infinite;background:#007AFF;top:-100px;left:-100px;opacity:.18}
-.cta-blob-2{background:#5856D6;bottom:-150px;right:-100px;left:auto;top:auto;opacity:.16;animation-delay:-5s}
+.cta-blob{position:absolute;width:500px;height:500px;border-radius:50%;filter:blur(80px);z-index:-1;animation:float 10s ease-in-out infinite;background:#FF6B1A;top:-100px;left:-100px;opacity:.22}
+.cta-blob-2{background:#1E5EFF;bottom:-150px;right:-100px;left:auto;top:auto;opacity:.18;animation-delay:-5s}
 @keyframes float{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(20px,-20px) scale(1.1)}}
 .cta-card h2{font-size:clamp(34px,5vw,60px);font-weight:800;letter-spacing:-.03em;margin:0 0 16px;line-height:1.05}
 .cta-card p{color:var(--text-2);font-size:17px;max-width:540px;margin:0 auto 32px}

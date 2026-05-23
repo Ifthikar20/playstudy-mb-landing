@@ -30,7 +30,7 @@ onMounted(() => {
 <style scoped>
 .cursor-glow{
   position:fixed;top:0;left:0;width:520px;height:520px;
-  background:radial-gradient(circle, rgba(0,122,255,.18), rgba(88,86,214,.08) 40%, transparent 70%);
+  background:radial-gradient(circle, rgba(255,107,26,.22), rgba(30,94,255,.1) 40%, transparent 70%);
   border-radius:50%;
   pointer-events:none;
   transform:translate(-50%,-50%);

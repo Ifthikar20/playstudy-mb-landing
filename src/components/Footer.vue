@@ -25,7 +25,7 @@
 .brand-mark{display:grid;grid-template-columns:1fr 1fr;gap:2px;width:22px;height:22px;border-radius:6px;overflow:hidden}
 .brand-dot{display:block;background:var(--primary)}
 .brand-dot:nth-child(2){background:var(--secondary)}
-.brand-dot:nth-child(3){background:var(--accent)}
-.brand-dot:nth-child(4){background:#FF9500}
+.brand-dot:nth-child(3){background:var(--primary-2)}
+.brand-dot:nth-child(4){background:var(--secondary-2)}
 .brand-name{font-size:15px}
 </style>

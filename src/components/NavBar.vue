@@ -74,8 +74,8 @@ onBeforeUnmount(() => window.removeEventListener('scroll', onScroll));
 .brand:hover .brand-mark{transform:rotate(45deg)}
 .brand-dot{display:block;background:var(--primary)}
 .brand-dot:nth-child(2){background:var(--secondary)}
-.brand-dot:nth-child(3){background:var(--accent)}
-.brand-dot:nth-child(4){background:#FF9500}
+.brand-dot:nth-child(3){background:var(--primary-2)}
+.brand-dot:nth-child(4){background:var(--secondary-2)}
 .brand-name{font-size:15px}
 .nav-links{display:flex;gap:22px;font-size:14px;color:var(--text-2)}
 .nav-links a{transition:color .2s}

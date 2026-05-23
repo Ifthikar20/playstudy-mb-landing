@@ -34,9 +34,9 @@ const screenTransition = {
 };
 
 const floatCards = [
-  { cls: 'fc-1', bg: '#22C55E22', color: '#22C55E', icon: '✓', title: '+1 streak', sub: 'Quiz passed', delay: 0 },
-  { cls: 'fc-2', bg: '#5856D622', color: '#5856D6', icon: '★', title: 'New badge', sub: 'Photosynthesis', delay: -1.5 },
-  { cls: 'fc-3', bg: '#007AFF22', color: '#007AFF', icon: '⚡', title: 'Generated', sub: 'in 7.2s', delay: -3 },
+  { cls: 'fc-1', bg: '#FF6B1A22', color: '#FF6B1A', icon: '✓', title: '+1 streak', sub: 'Quiz passed', delay: 0 },
+  { cls: 'fc-2', bg: '#1E5EFF22', color: '#1E5EFF', icon: '★', title: 'New badge', sub: 'Photosynthesis', delay: -1.5 },
+  { cls: 'fc-3', bg: '#FFB34722', color: '#B36100', icon: '⚡', title: 'Generated', sub: 'in 7.2s', delay: -3 },
 ];
 </script>
 
@@ -130,8 +130,8 @@ const floatCards = [
   background:#0a0a0a;border-radius:48px;
   padding:14px;
   box-shadow:
-    0 60px 120px rgba(0,0,0,.25),
-    0 30px 50px rgba(0,122,255,.15),
+    0 60px 120px rgba(11,18,32,.25),
+    0 30px 50px rgba(255,107,26,.18),
     inset 0 0 0 2px #1c1c1e,
     inset 0 0 0 3px #2a2a2c;
   position:relative;
@@ -167,7 +167,7 @@ const floatCards = [
 .type-line-2{color:var(--text);font-weight:500;font-size:12.5px;word-break:break-all}
 .caret{display:inline-block;width:1.5px;height:14px;background:var(--primary);vertical-align:middle;animation:blink 1s infinite}
 @keyframes blink{50%{opacity:0}}
-.screen-cta{background:var(--primary);color:#fff;border-radius:12px;padding:14px;font-weight:600;font-size:14px}
+.screen-cta{background:linear-gradient(135deg,var(--primary),var(--primary-2));color:#fff;border-radius:12px;padding:14px;font-weight:600;font-size:14px}
 .chips{display:flex;gap:6px;flex-wrap:wrap}
 .chips span{font-size:11.5px;padding:5px 10px;background:var(--surface);border-radius:999px;color:var(--text-2)}
 .seg{display:flex;gap:4px;background:var(--surface);border-radius:10px;padding:3px;font-size:12px}
@@ -176,7 +176,7 @@ const floatCards = [
 .sum-card{background:var(--surface);border-radius:14px;padding:14px}
 .sum-card h4{margin:0 0 6px;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--text-2)}
 .sum-card p{margin:0;font-size:13px;line-height:1.5}
-.sum-card-2{background:linear-gradient(135deg,#007AFF11,#5856D611)}
+.sum-card-2{background:linear-gradient(135deg,#FF6B1A14,#1E5EFF14)}
 .bar-row{display:flex;gap:4px;margin-top:10px}
 .bar-row span{height:4px;flex:1;background:var(--border);border-radius:2px}
 .bar-row span:nth-child(1){background:var(--primary)}
@@ -184,9 +184,9 @@ const floatCards = [
 .q{font-size:15px;font-weight:600;line-height:1.35;margin-top:4px}
 .opts{display:flex;flex-direction:column;gap:8px}
 .opt{background:var(--surface);padding:13px 14px;border-radius:12px;font-size:13px;font-weight:500;border:2px solid transparent}
-.opt.is-correct{background:#22C55E15;border-color:#22C55E;color:#15803d}
+.opt.is-correct{background:#FF6B1A14;border-color:#FF6B1A;color:#B14C0E}
 .progress{height:6px;background:var(--surface);border-radius:3px;overflow:hidden}
-.progress span{display:block;height:100%;width:40%;background:linear-gradient(90deg,#007AFF,#5856D6);animation:fill 1.4s var(--ease)}
+.progress span{display:block;height:100%;width:40%;background:linear-gradient(90deg,#FF6B1A,#1E5EFF);animation:fill 1.4s var(--ease)}
 @keyframes fill{from{width:0}}
 .clue{font-size:13px;color:var(--text);background:var(--surface);padding:12px;border-radius:12px;line-height:1.4}
 .tiles{display:flex;flex-wrap:wrap;gap:4px;justify-content:center}
@@ -195,7 +195,7 @@ const floatCards = [
 .keys{display:grid;grid-template-columns:repeat(6,1fr);gap:4px}
 .keys span{background:var(--surface);padding:7px 0;text-align:center;font-size:12px;font-weight:600;border-radius:6px}
 .keys .pulse{background:var(--primary);color:#fff;animation:pulseKey 1.6s infinite}
-@keyframes pulseKey{0%,100%{box-shadow:0 0 0 0 rgba(0,122,255,.4)}50%{box-shadow:0 0 0 8px rgba(0,122,255,0)}}
+@keyframes pulseKey{0%,100%{box-shadow:0 0 0 0 rgba(255,107,26,.4)}50%{box-shadow:0 0 0 8px rgba(255,107,26,0)}}
 .lives{font-size:14px;color:#EF4444;letter-spacing:2px}
 .lives .dim{opacity:.3}
 

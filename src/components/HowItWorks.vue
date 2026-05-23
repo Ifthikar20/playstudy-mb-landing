@@ -18,7 +18,7 @@ const reveal = (i) => ({
       :transition="{ duration: 0.7 }"
     >
       <span class="eyebrow">How it works</span>
-      <h2>From paste to play in three steps.</h2>
+      <h2>From paste to <em>play</em> in three steps.</h2>
     </motion.div>
 
     <ol class="steps">
@@ -47,9 +47,9 @@ const reveal = (i) => ({
         <h3>Read · Recall · Play</h3>
         <p>Move through the three modes. Each one locks the material in a little deeper.</p>
         <div class="step-vis step-vis-3">
-          <span class="mode-pill" style="--c:#007AFF">Read</span>
-          <span class="mode-pill" style="--c:#5856D6">Recall</span>
-          <span class="mode-pill" style="--c:#22C55E">Play</span>
+          <span class="mode-pill" style="--c:#FF6B1A">Read</span>
+          <span class="mode-pill" style="--c:#1E5EFF">Recall</span>
+          <span class="mode-pill" style="--c:#FFB347">Play</span>
         </div>
       </motion.li>
     </ol>
@@ -68,7 +68,7 @@ const reveal = (i) => ({
 .step:hover{box-shadow:var(--shadow-2)}
 .step-num{
   font-size:14px;font-weight:700;color:var(--primary);
-  background:rgba(0,122,255,.08);width:fit-content;padding:4px 10px;border-radius:999px;margin-bottom:16px;
+  background:rgba(255,107,26,.1);width:fit-content;padding:4px 10px;border-radius:999px;margin-bottom:16px;
 }
 .step h3{margin:0 0 8px;font-size:21px;font-weight:700;letter-spacing:-.01em}
 .step p{margin:0 0 24px;color:var(--text-2);font-size:15px}
@@ -84,7 +84,7 @@ const reveal = (i) => ({
 .orbit span{position:absolute;width:14px;height:14px;border-radius:50%;left:50%;top:50%;margin:-7px}
 .orbit span:nth-child(1){background:var(--primary);animation:orbit 3s linear infinite}
 .orbit span:nth-child(2){background:var(--secondary);animation:orbit 3s linear infinite -1s}
-.orbit span:nth-child(3){background:var(--accent);animation:orbit 3s linear infinite -2s}
+.orbit span:nth-child(3){background:var(--primary-2);animation:orbit 3s linear infinite -2s}
 @keyframes orbit{from{transform:rotate(0) translateX(34px) rotate(0)}to{transform:rotate(360deg) translateX(34px) rotate(-360deg)}}
 
 .mode-pill{
