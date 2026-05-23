@@ -56,8 +56,8 @@ const fadeUp = (delay = 0) => ({
           Paste a link, drop a file, or type. PlayStudy spins up a <b>Summary</b>, a <b>Quiz</b>, and a <b>Guess-the-Word</b> mini-game in seconds — so learning actually sticks.
         </motion.p>
         <motion.div class="cta-row" v-bind="fadeUp(0.35)">
-          <a class="btn btn-primary" href="#download">Download for iOS</a>
-          <a class="btn btn-secondary" href="#download">Get on Android</a>
+          <a class="btn btn-primary" href="#download">Download on the App Store</a>
+          <a class="btn btn-secondary" href="#how">See how it works</a>
         </motion.div>
 
         <motion.div class="hero-stats" v-bind="fadeUp(0.5)">

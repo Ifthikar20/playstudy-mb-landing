@@ -28,12 +28,11 @@ const videoSrc = '/videos/watercolor-.mp4';
       <div class="cta-overlay" aria-hidden="true"></div>
 
       <div class="cta-inner">
-        <span class="cta-eyebrow">Free · iOS &amp; Android</span>
+        <span class="cta-eyebrow">Free · iPhone &amp; iPad</span>
         <h2>Stop re-reading. <br/><em>Start playing.</em></h2>
         <p>PlayStudy is a free download. Bring any topic — leave with a study set that fits in your pocket.</p>
         <div class="cta-row">
-          <a class="btn btn-primary" href="#">App Store</a>
-          <a class="btn btn-inverse" href="#">Google Play</a>
+          <a class="btn btn-primary" href="#">Download on the App Store</a>
         </div>
       </div>
     </motion.div>
