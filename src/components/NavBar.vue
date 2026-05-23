@@ -34,7 +34,7 @@ onBeforeUnmount(() => window.removeEventListener('scroll', onScroll));
     :transition="{ duration: 0.7, ease: [0.2, 0.8, 0.2, 1] }"
   >
     <a class="brand" href="#top" aria-label="PlayStudy home">
-      <img class="brand-logo" src="/main-logo.png" alt="" />
+      <img class="brand-logo" src="/main-logo.png" alt="PlayStudy" width="28" height="28" />
       <span class="brand-name">PlayStudy</span>
     </a>
     <div class="nav-links">
@@ -65,8 +65,8 @@ onBeforeUnmount(() => window.removeEventListener('scroll', onScroll));
 .nav.scrolled{box-shadow:0 8px 30px rgba(0,0,0,.08)}
 .brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:-.01em}
 .brand-logo{
-  width:26px;height:26px;object-fit:contain;
-  border-radius:7px;
+  width:28px;height:28px;object-fit:contain;
+  display:block;
 }
 .brand-name{font-size:15px}
 .nav-links{display:flex;gap:22px;font-size:14px;color:var(--text-2)}
