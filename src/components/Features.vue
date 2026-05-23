@@ -75,14 +75,14 @@ const reveal = (i) => ({
 </template>
 
 <style scoped>
-.features{padding:120px 24px;max-width:1240px;margin:0 auto}
-.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.features{padding:100px 24px;max-width:1100px;margin:0 auto}
+.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 .feature{
   position:relative;
   background:#fff;
   border:1px solid var(--border);
-  border-radius:24px;
-  padding:32px;
+  border-radius:18px;
+  padding:22px;
   overflow:hidden;
   transition:box-shadow .5s ease, border-color .5s;
 }
@@ -94,16 +94,16 @@ const reveal = (i) => ({
 .feature:hover{box-shadow:var(--shadow-2);border-color:transparent}
 .feature:hover::before{opacity:.08}
 .f-ic{
-  width:52px;height:52px;border-radius:14px;
+  width:42px;height:42px;border-radius:12px;
   background:color-mix(in srgb, var(--c) 12%, transparent);
-  color:var(--c);display:grid;place-items:center;margin-bottom:22px;
+  color:var(--c);display:grid;place-items:center;margin-bottom:16px;
   transition:transform .5s var(--ease);
 }
 .feature:hover .f-ic{transform:rotate(-8deg) scale(1.05)}
-.feature h3{margin:0 0 8px;font-size:21px;font-weight:700;letter-spacing:-.01em}
-.feature p{margin:0;color:var(--text-2);font-size:15px;line-height:1.55}
+.feature h3{margin:0 0 6px;font-size:17px;font-weight:700;letter-spacing:-.01em}
+.feature p{margin:0;color:var(--text-2);font-size:13.5px;line-height:1.5}
 .f-preview{
-  margin-top:24px;height:80px;border-radius:14px;
+  margin-top:16px;height:64px;border-radius:12px;
   background:var(--surface);padding:16px;
   display:flex;align-items:center;justify-content:center;gap:8px;
   position:relative;overflow:hidden;

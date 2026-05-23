@@ -40,9 +40,9 @@ const t = {
 };
 
 const floatCards = [
-  { cls: 'fc-1', bg: '#FF6B1A22', color: '#FF6B1A', icon: '✓', title: '5 / 5 quiz', sub: 'Mitochondria', delay: 0 },
-  { cls: 'fc-2', bg: '#1E5EFF22', color: '#1E5EFF', icon: '★', title: 'New badge', sub: 'Biology 101', delay: -1.5 },
-  { cls: 'fc-3', bg: '#FFB34722', color: '#B36100', icon: '⚡', title: 'Generated', sub: 'in 7.2s', delay: -3 },
+  { cls: 'fc-1', bg: 'rgba(255,107,26,.1)', color: '#FF6B1A', icon: 'check', title: '5 / 5 quiz', sub: 'Mitochondria', delay: 0 },
+  { cls: 'fc-2', bg: 'rgba(30,94,255,.1)', color: '#1E5EFF', icon: 'star', title: 'New badge', sub: 'Biology 101', delay: -1.5 },
+  { cls: 'fc-3', bg: 'rgba(255,179,71,.18)', color: '#B36100', icon: 'bolt', title: 'Generated', sub: 'in 7.2s', delay: -3 },
 ];
 </script>
 
@@ -65,27 +65,27 @@ const floatCards = [
           <motion.div v-if="screens[active]==='input'" key="input" class="screen" v-bind="t">
             <div class="s-top"><span class="s-back">‹</span><span class="s-title">New study set</span></div>
             <div class="tabs">
-              <span class="tab is-on">🔗 Link</span><span class="tab">📄 File</span><span class="tab">✏️ Text</span>
+              <span class="tab is-on">Link</span><span class="tab">File</span><span class="tab">Text</span>
             </div>
             <div class="input-card">
-              <div class="type-line muted">Paste a URL…</div>
-              <div class="type-line url">https://en.wikipedia.org/wiki/Mitochondrion<span class="caret">|</span></div>
-              <div class="hint">We support Wikipedia, blogs, news articles, PDFs and your own notes.</div>
+              <div class="type-line muted">Paste a URL</div>
+              <div class="type-line url">en.wikipedia.org/wiki/Mitochondrion<span class="caret">|</span></div>
+              <div class="hint">Wikipedia, blogs, PDFs, or your own notes.</div>
             </div>
-            <button class="screen-cta">Generate study set →</button>
+            <button class="screen-cta">Generate study set</button>
             <div class="chips">
-              <span>🧬 Biology</span><span>⏱ 5 min</span><span>🎯 Medium</span>
+              <span>Biology</span><span>5 min</span><span>Medium</span>
             </div>
           </motion.div>
 
           <!-- 2. LOADING -->
           <motion.div v-else-if="screens[active]==='loading'" key="loading" class="screen screen-center" v-bind="t">
             <div class="orbit-lg"><span></span><span></span><span></span></div>
-            <div class="load-title">Generating your study set</div>
+            <div class="load-title">Generating your set</div>
             <div class="load-steps">
-              <div class="load-step done">✓ Fetching article</div>
-              <div class="load-step done">✓ Building summary</div>
-              <div class="load-step doing">○ Writing quiz · game</div>
+              <div class="load-step done"><svg viewBox="0 0 12 12" width="10" height="10"><path d="M2 6l2.5 2.5L10 3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Fetching article</div>
+              <div class="load-step done"><svg viewBox="0 0 12 12" width="10" height="10"><path d="M2 6l2.5 2.5L10 3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Building summary</div>
+              <div class="load-step doing"><svg viewBox="0 0 12 12" width="10" height="10"><circle cx="6" cy="6" r="4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>Writing quiz &amp; game</div>
             </div>
             <div class="progress"><span style="width:72%"></span></div>
           </motion.div>
@@ -96,36 +96,39 @@ const floatCards = [
             <div class="seg"><span class="is-on">Summary</span><span>Quiz</span><span>Game</span></div>
             <div class="sum-card sum-card-2">
               <h4>Key idea</h4>
-              <p>Mitochondria are the <b>powerhouse of the cell</b> — they convert nutrients into ATP, the molecule cells use for energy.</p>
+              <p>Mitochondria are the <b>powerhouse of the cell</b> — converting nutrients into ATP, the molecule cells use for energy.</p>
             </div>
             <div class="sum-card">
               <h4>Highlights</h4>
               <ul class="bullets-list">
-                <li>Have their own <b>DNA</b>, inherited from the mother</li>
+                <li>Have their own <b>DNA</b>, inherited maternally</li>
                 <li>Wrapped in a <b>double membrane</b></li>
-                <li>ATP is produced via the <b>Krebs cycle</b></li>
+                <li>ATP produced via the <b>Krebs cycle</b></li>
               </ul>
             </div>
           </motion.div>
 
           <!-- 4. QUIZ -->
           <motion.div v-else-if="screens[active]==='quiz'" key="quiz" class="screen" v-bind="t">
-            <div class="s-top"><span class="s-back">‹</span><span class="s-title">Quiz · 3 of 5</span><span class="s-meta">❤ 3</span></div>
+            <div class="s-top"><span class="s-back">‹</span><span class="s-title">Quiz · 3 of 5</span><span class="s-meta">3 / 5</span></div>
             <div class="progress mini"><span style="width:60%"></span></div>
             <div class="q">Mitochondria produce most of the cell's supply of…</div>
             <div class="opts">
               <div class="opt">Glucose</div>
-              <div class="opt is-correct">ATP ✓</div>
+              <div class="opt is-correct">
+                <span>ATP</span>
+                <svg viewBox="0 0 14 14" width="12" height="12"><path d="M3 7l3 3 5-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
               <div class="opt">DNA</div>
               <div class="opt">Chlorophyll</div>
             </div>
-            <button class="screen-cta">Next →</button>
+            <button class="screen-cta">Next question</button>
           </motion.div>
 
           <!-- 5. GAME -->
           <motion.div v-else-if="screens[active]==='game'" key="game" class="screen" v-bind="t">
-            <div class="s-top"><span class="s-back">‹</span><span class="s-title">Guess the Word</span><span class="s-meta">Round 2/4</span></div>
-            <div class="clue">The molecule mitochondria produce to give cells <i>energy</i>.</div>
+            <div class="s-top"><span class="s-back">‹</span><span class="s-title">Guess the Word</span><span class="s-meta">Round 2 / 4</span></div>
+            <div class="clue">The molecule mitochondria produce to give cells <em>energy</em>.</div>
             <div class="tiles">
               <span>A</span><span>T</span><span>P</span>
             </div>
@@ -133,25 +136,30 @@ const floatCards = [
               <span>Q</span><span>W</span><span>E</span><span>R</span><span class="used">T</span><span>Y</span>
               <span>U</span><span>I</span><span class="pulse">O</span><span class="used wrong">P</span><span>A</span><span>S</span>
             </div>
-            <div class="lives">♥ ♥ ♥ ♥ ♥ <span class="dim">♥</span></div>
+            <div class="lives">
+              <svg v-for="n in 6" :key="n" viewBox="0 0 16 16" width="13" height="13" :class="{ dim: n === 6 }"><path d="M8 14s-5-3-5-7a3 3 0 0 1 5-2 3 3 0 0 1 5 2c0 4-5 7-5 7z" fill="currentColor"/></svg>
+            </div>
           </motion.div>
 
           <!-- 6. LIBRARY -->
           <motion.div v-else key="library" class="screen" v-bind="t">
             <div class="s-top"><span class="s-title">Library</span><span class="s-meta">+ New</span></div>
-            <div class="search"><span>🔍</span>Search your sets</div>
+            <div class="search">
+              <svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="5"/><path d="M11 11l3 3" stroke-linecap="round"/></svg>
+              Search your sets
+            </div>
             <div class="lib-card">
-              <div class="lib-ic" style="background:#FF6B1A22;color:#FF6B1A">🧬</div>
+              <div class="lib-ic" style="background:rgba(255,107,26,.1);color:#FF6B1A">Bi</div>
               <div class="lib-meta"><b>Mitochondria</b><span>Biology · 5 / 5</span></div>
               <span class="dot ok"></span>
             </div>
             <div class="lib-card">
-              <div class="lib-ic" style="background:#1E5EFF22;color:#1E5EFF">🪐</div>
+              <div class="lib-ic" style="background:rgba(30,94,255,.1);color:#1E5EFF">As</div>
               <div class="lib-meta"><b>The Solar System</b><span>Astronomy · 3 / 8</span></div>
               <span class="dot mid"></span>
             </div>
             <div class="lib-card">
-              <div class="lib-ic" style="background:#FFB34722;color:#B36100">📜</div>
+              <div class="lib-ic" style="background:rgba(255,179,71,.18);color:#B36100">Hi</div>
               <div class="lib-meta"><b>French Revolution</b><span>History · 2 / 6</span></div>
               <span class="dot low"></span>
             </div>
@@ -159,10 +167,18 @@ const floatCards = [
         </AnimatePresence>
 
         <div class="tabbar">
-          <span :class="{ on: screens[active]==='input' || screens[active]==='loading' }">⊕</span>
-          <span :class="{ on: ['summary','quiz','game'].includes(screens[active]) }">📖</span>
-          <span :class="{ on: screens[active]==='library' }">📚</span>
-          <span>👤</span>
+          <button :class="{ on: ['input','loading'].includes(screens[active]) }" aria-label="Create">
+            <svg viewBox="0 0 18 18" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M9 3v12M3 9h12"/></svg>
+          </button>
+          <button :class="{ on: ['summary','quiz','game'].includes(screens[active]) }" aria-label="Study">
+            <svg viewBox="0 0 18 18" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M3 4h5a2 2 0 0 1 2 2v9a2 2 0 0 0-2-2H3zM15 4h-5a2 2 0 0 0-2 2v9a2 2 0 0 1 2-2h5z"/></svg>
+          </button>
+          <button :class="{ on: screens[active]==='library' }" aria-label="Library">
+            <svg viewBox="0 0 18 18" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 3v12M7 3v12M10 4l3 12M14 4l1 12"/></svg>
+          </button>
+          <button aria-label="Profile">
+            <svg viewBox="0 0 18 18" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="9" cy="6" r="3"/><path d="M3 16c1-3.5 3.5-5 6-5s5 1.5 6 5"/></svg>
+          </button>
         </div>
       </div>
     </div>
@@ -176,7 +192,11 @@ const floatCards = [
       :transition="{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: fc.delay }"
       :while-hover="{ scale: 1.06 }"
     >
-      <div class="fc-ic" :style="{ background: fc.bg, color: fc.color }">{{ fc.icon }}</div>
+      <div class="fc-ic" :style="{ background: fc.bg, color: fc.color }">
+        <svg v-if="fc.icon==='check'" viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8l3.5 3.5L13 5"/></svg>
+        <svg v-else-if="fc.icon==='star'" viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M8 1.5l2 4.5 5 .5-3.7 3.4 1 4.9L8 12.4 3.7 14.8l1-4.9L1 6.5l5-.5z"/></svg>
+        <svg v-else viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M9 1L3 9h4l-1 6 7-9H9z"/></svg>
+      </div>
       <div><b>{{ fc.title }}</b><span>{{ fc.sub }}</span></div>
     </motion.div>
   </div>
@@ -189,8 +209,8 @@ const floatCards = [
   background:#0a0a0a;border-radius:48px;
   padding:14px;
   box-shadow:
-    0 60px 120px rgba(11,18,32,.25),
-    0 30px 50px rgba(255,107,26,.18),
+    0 40px 90px rgba(11,18,32,.18),
+    0 18px 40px rgba(11,18,32,.08),
     inset 0 0 0 2px #1c1c1e,
     inset 0 0 0 3px #2a2a2c;
   position:relative;
@@ -243,12 +263,11 @@ const floatCards = [
 @keyframes blink{50%{opacity:0}}
 
 .screen-cta{
-  background:linear-gradient(135deg,var(--primary),var(--primary-2));
-  color:#fff;border-radius:12px;padding:12px;font-weight:600;font-size:13.5px;
-  box-shadow:0 4px 12px rgba(255,107,26,.3);
+  background:#0B1220;color:#fff;border-radius:11px;
+  padding:11px;font-weight:600;font-size:13px;letter-spacing:-.005em;
 }
 .chips{display:flex;gap:6px;flex-wrap:wrap}
-.chips span{font-size:11px;padding:5px 9px;background:var(--surface);border-radius:999px;color:var(--text)}
+.chips span{font-size:11px;padding:4px 9px;background:transparent;border:1px solid var(--border);border-radius:999px;color:var(--text-2);font-weight:500}
 
 /* loading */
 .orbit-lg{position:relative;width:70px;height:70px;margin-bottom:18px}
@@ -258,7 +277,8 @@ const floatCards = [
 .orbit-lg span:nth-child(3){background:var(--primary-2);animation:orbit 2s linear infinite -1.33s}
 @keyframes orbit{from{transform:rotate(0) translateX(28px) rotate(0)}to{transform:rotate(360deg) translateX(28px) rotate(-360deg)}}
 .load-title{font-size:15px;font-weight:600;margin-bottom:14px}
-.load-steps{display:flex;flex-direction:column;gap:6px;font-size:12px;color:var(--text-2);align-items:flex-start;width:100%;padding:0 20px}
+.load-steps{display:flex;flex-direction:column;gap:7px;font-size:12px;color:var(--text-2);align-items:flex-start;width:100%;padding:0 28px;margin-bottom:18px}
+.load-step{display:flex;align-items:center;gap:8px}
 .load-step.done{color:#15803d}
 .load-step.doing{color:var(--primary)}
 
@@ -270,14 +290,15 @@ const floatCards = [
 .sum-card{background:var(--surface);border-radius:14px;padding:13px}
 .sum-card h4{margin:0 0 6px;font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--text-2)}
 .sum-card p{margin:0;font-size:12.5px;line-height:1.5}
-.sum-card-2{background:linear-gradient(135deg,#FF6B1A14,#1E5EFF14);border:1px solid #FF6B1A22}
+.sum-card-2{background:#FBFAF6;border:1px solid var(--border)}
+.sum-card-2 h4{color:var(--primary)}
 .bullets-list{margin:0;padding-left:14px;font-size:12px;line-height:1.6;display:flex;flex-direction:column;gap:2px}
 
 /* quiz */
 .q{font-size:14px;font-weight:600;line-height:1.35}
 .opts{display:flex;flex-direction:column;gap:7px}
 .opt{background:var(--surface);padding:11px 13px;border-radius:11px;font-size:12.5px;font-weight:500;border:2px solid transparent}
-.opt.is-correct{background:#FF6B1A14;border-color:var(--primary);color:#B14C0E}
+.opt.is-correct{background:#fff;border-color:var(--primary);color:var(--primary);display:flex;align-items:center;justify-content:space-between}
 .progress{height:6px;background:var(--surface);border-radius:3px;overflow:hidden}
 .progress.mini{height:4px}
 .progress span{display:block;height:100%;background:linear-gradient(90deg,#FF6B1A,#1E5EFF);transition:width 1s var(--ease)}
@@ -285,20 +306,20 @@ const floatCards = [
 /* game */
 .clue{font-size:12.5px;color:var(--text);background:var(--surface);padding:11px;border-radius:11px;line-height:1.4}
 .tiles{display:flex;gap:6px;justify-content:center;padding:8px 0}
-.tiles span{width:32px;height:40px;background:linear-gradient(135deg,var(--primary),var(--primary-2));color:#fff;border-radius:8px;display:grid;place-items:center;font-weight:800;font-size:16px}
+.tiles span{width:34px;height:42px;background:#fff;border:1.5px solid var(--primary);color:var(--primary);border-radius:8px;display:grid;place-items:center;font-weight:800;font-size:18px;font-family:var(--serif);font-style:italic}
 .keys{display:grid;grid-template-columns:repeat(6,1fr);gap:4px}
 .keys span{background:var(--surface);padding:7px 0;text-align:center;font-size:11.5px;font-weight:600;border-radius:6px}
 .keys .used{opacity:.3}
 .keys .wrong{background:#fee2e2;color:#dc2626;opacity:1}
-.keys .pulse{background:var(--secondary);color:#fff;animation:pulseKey 1.6s infinite}
-@keyframes pulseKey{0%,100%{box-shadow:0 0 0 0 rgba(30,94,255,.4)}50%{box-shadow:0 0 0 8px rgba(30,94,255,0)}}
-.lives{font-size:14px;color:#EF4444;letter-spacing:2px;text-align:center}
-.lives .dim{opacity:.3}
+.keys .pulse{background:var(--text);color:#fff;animation:pulseKey 1.6s infinite}
+@keyframes pulseKey{0%,100%{box-shadow:0 0 0 0 rgba(11,18,32,.25)}50%{box-shadow:0 0 0 6px rgba(11,18,32,0)}}
+.lives{display:flex;gap:3px;justify-content:center;color:#EF4444}
+.lives svg.dim{opacity:.2}
 
 /* library */
-.search{background:var(--surface);padding:9px 12px;border-radius:10px;font-size:12.5px;color:var(--text-2);display:flex;gap:6px;align-items:center}
-.lib-card{background:var(--surface);border-radius:12px;padding:10px;display:flex;align-items:center;gap:10px}
-.lib-ic{width:34px;height:34px;border-radius:8px;display:grid;place-items:center;font-size:16px;flex-shrink:0}
+.search{background:var(--surface);padding:9px 12px;border-radius:10px;font-size:12.5px;color:var(--text-2);display:flex;gap:8px;align-items:center}
+.lib-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:10px;display:flex;align-items:center;gap:10px}
+.lib-ic{width:32px;height:32px;border-radius:8px;display:grid;place-items:center;font-size:11px;font-weight:700;flex-shrink:0;font-family:var(--serif);font-style:italic}
 .lib-meta{flex:1;display:flex;flex-direction:column;line-height:1.25}
 .lib-meta b{font-size:12.5px;font-weight:600}
 .lib-meta span{font-size:10.5px;color:var(--text-2)}
@@ -308,7 +329,8 @@ const floatCards = [
 .dot.low{background:#EF4444}
 
 /* tabbar */
-.tabbar{position:absolute;bottom:0;left:0;right:0;height:46px;display:flex;justify-content:space-around;align-items:center;border-top:1px solid var(--border);background:#fff;font-size:18px;color:var(--text-2)}
+.tabbar{position:absolute;bottom:0;left:0;right:0;height:46px;display:flex;justify-content:space-around;align-items:center;border-top:1px solid var(--border);background:#fff;color:var(--text-2)}
+.tabbar button{padding:0;display:grid;place-items:center}
 .tabbar .on{color:var(--primary)}
 
 /* floating cards */

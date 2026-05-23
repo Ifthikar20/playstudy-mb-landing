@@ -161,15 +161,15 @@ const reveal = (i) => ({
 </template>
 
 <style scoped>
-.games{padding:60px 24px 120px;max-width:1240px;margin:0 auto}
+.games{padding:40px 24px 100px;max-width:1100px;margin:0 auto}
 h2 em{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--secondary);padding:0 .05em}
 
-.game-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+.game-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
 
 .g-card{
   position:relative;
-  background:#fff;border:1px solid var(--border);border-radius:24px;
-  padding:28px;display:flex;flex-direction:column;gap:20px;
+  background:#fff;border:1px solid var(--border);border-radius:18px;
+  padding:20px;display:flex;flex-direction:column;gap:14px;
   overflow:hidden;
   transition:box-shadow .5s, border-color .5s;
 }
@@ -187,11 +187,11 @@ h2 em{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--sec
   color:var(--c);background:color-mix(in srgb, var(--c) 12%, transparent);
   padding:4px 10px;border-radius:999px;width:fit-content;
 }
-.g-head h3{margin:0;font-size:22px;font-weight:700;letter-spacing:-.015em}
-.g-head p{margin:0;color:var(--text-2);font-size:14.5px;line-height:1.55}
+.g-head h3{margin:0;font-size:17px;font-weight:700;letter-spacing:-.01em}
+.g-head p{margin:0;color:var(--text-2);font-size:13px;line-height:1.5}
 
 .g-vis{
-  height:170px;border-radius:18px;
+  height:130px;border-radius:14px;
   background:#FBFAF6;
   background-image:
     linear-gradient(rgba(30,94,255,.06) 1px,transparent 1px),
@@ -205,10 +205,10 @@ h2 em{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--sec
 /* GUESS — tiles flip in */
 .g-vis-guess{gap:8px;display:flex}
 .tile{
-  width:52px;height:64px;border-radius:10px;
-  background:linear-gradient(135deg,var(--c),color-mix(in srgb,var(--c) 60%,#fff));
-  color:#fff;font-weight:800;font-size:26px;display:grid;place-items:center;
-  box-shadow:0 8px 20px color-mix(in srgb,var(--c) 25%,transparent);
+  width:38px;height:48px;border-radius:8px;
+  background:#fff;border:1.5px solid var(--c);
+  color:var(--c);font-weight:800;font-size:20px;display:grid;place-items:center;
+  font-family:var(--serif);font-style:italic;
   animation:tileBounce 2.6s ease-in-out infinite;
 }
 @keyframes tileBounce{0%,80%,100%{transform:translateY(0)}40%{transform:translateY(-10px) rotate(-3deg)}}
@@ -216,35 +216,35 @@ h2 em{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--sec
 /* FLASHCARD */
 .g-vis-flash{perspective:900px;cursor:pointer}
 .card3d{
-  position:relative;width:230px;height:130px;transform-style:preserve-3d;
+  position:relative;width:200px;height:100px;transform-style:preserve-3d;
 }
 .face{
-  position:absolute;inset:0;border-radius:14px;background:#fff;border:1px solid var(--border);
+  position:absolute;inset:0;border-radius:12px;background:#fff;border:1px solid var(--border);
   box-shadow:var(--shadow-1);
-  padding:18px;display:flex;flex-direction:column;justify-content:space-between;
+  padding:14px;display:flex;flex-direction:column;justify-content:space-between;
   backface-visibility:hidden;
 }
-.face-tag{font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--c);font-weight:700}
-.face b{font-size:18px;font-weight:700;letter-spacing:-.01em;line-height:1.25}
+.face-tag{font-size:9.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--c);font-weight:700}
+.face b{font-size:15px;font-weight:700;letter-spacing:-.01em;line-height:1.25}
 .back{background:linear-gradient(135deg, color-mix(in srgb,var(--c) 8%, #fff), #fff);transform:rotateY(180deg)}
-.back b{font-size:14px;font-weight:500;line-height:1.45}
-.flash-hint{position:absolute;bottom:8px;right:12px;font-size:11px;color:var(--text-2)}
+.back b{font-size:12px;font-weight:500;line-height:1.45}
+.flash-hint{position:absolute;bottom:6px;right:10px;font-size:10px;color:var(--text-2)}
 
 /* MATCH */
 .g-vis-match{
-  display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:14px;
+  display:grid;grid-template-columns:1fr 1fr;gap:5px;padding:12px;
 }
 .match-tile{
-  background:#fff;border:1.5px solid var(--border);border-radius:10px;
-  padding:8px;font-size:12px;font-weight:600;color:var(--text);
+  background:#fff;border:1.5px solid var(--border);border-radius:8px;
+  padding:6px 4px;font-size:11px;font-weight:600;color:var(--text);
   transition:all .35s var(--ease);text-align:center;
 }
 .match-tile:hover{border-color:var(--c)}
 .match-tile.on{background:var(--c);color:#fff;border-color:var(--c);transform:scale(1.04)}
 
 /* FILL */
-.g-vis-fill{flex-direction:column;gap:14px;padding:20px;display:flex;justify-content:center;align-items:center}
-.sentence{font-size:14px;line-height:1.7;color:var(--text);text-align:center}
+.g-vis-fill{flex-direction:column;gap:10px;padding:14px 18px;display:flex;justify-content:center;align-items:center}
+.sentence{font-size:12.5px;line-height:1.6;color:var(--text);text-align:center}
 .blank{
   display:inline-block;padding:2px 10px;border-radius:8px;
   border-bottom:2px dashed var(--c);font-weight:700;

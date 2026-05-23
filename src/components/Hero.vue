@@ -30,6 +30,17 @@ const fadeUp = (delay = 0) => ({
       <div class="blob blob-3"></div>
     </div>
     <div class="paper-bg" aria-hidden="true"></div>
+    <div class="paper-formulas" aria-hidden="true">
+      <span class="f f-1">E = mc<sup>2</sup></span>
+      <span class="f f-2">a<sup>2</sup> + b<sup>2</sup> = c<sup>2</sup></span>
+      <span class="f f-3">∫<sub>0</sub><sup>∞</sup> e<sup>−x</sup> dx = 1</span>
+      <span class="f f-4">π ≈ 3.14159</span>
+      <span class="f f-5">f(x) = sin(x)</span>
+      <span class="f f-6">∇ · E = ρ ⁄ ε<sub>0</sub></span>
+      <span class="f f-7">x = <span class="frac"><span class="num">−b ± √(b²−4ac)</span><span class="den">2a</span></span></span>
+      <span class="f f-8">e<sup>iπ</sup> + 1 = 0</span>
+      <span class="f f-9">lim<sub>x→0</sub> sin(x) ⁄ x = 1</span>
+    </div>
     <div class="paper-fade" aria-hidden="true"></div>
 
     <div class="hero-inner">
@@ -112,6 +123,31 @@ const fadeUp = (delay = 0) => ({
   background:
     radial-gradient(ellipse 90% 60% at 50% 110%, rgba(255,255,255,1) 30%, transparent 70%),
     linear-gradient(180deg, rgba(255,255,255,.5) 0%, rgba(255,255,255,0) 40%, rgba(255,255,255,.85) 100%);
+}
+.paper-formulas{position:absolute;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.paper-formulas .f{
+  position:absolute;
+  font-family:var(--serif);font-style:italic;
+  color:#1E5EFF;opacity:.28;
+  font-size:22px;line-height:1;letter-spacing:-.005em;
+  white-space:nowrap;
+}
+.paper-formulas sup{font-size:.65em;vertical-align:super;line-height:0}
+.paper-formulas sub{font-size:.65em;vertical-align:sub;line-height:0}
+.paper-formulas .frac{display:inline-flex;flex-direction:column;vertical-align:middle;font-size:.8em;line-height:1.05;text-align:center;margin:0 .15em}
+.paper-formulas .frac .num{border-bottom:1px solid currentColor;padding:0 .2em}
+.paper-formulas .frac .den{padding:0 .2em}
+.f-1{top:14%;left:6%;transform:rotate(-6deg)}
+.f-2{top:8%;right:7%;transform:rotate(4deg);font-size:24px}
+.f-3{top:46%;left:3%;transform:rotate(-3deg);font-size:20px}
+.f-4{top:62%;right:38%;transform:rotate(2deg);opacity:.22}
+.f-5{bottom:18%;left:8%;transform:rotate(-4deg);font-size:21px}
+.f-6{top:30%;right:12%;transform:rotate(-2deg);font-size:19px;opacity:.22}
+.f-7{bottom:24%;right:6%;transform:rotate(3deg);font-size:18px}
+.f-8{top:74%;left:36%;transform:rotate(-5deg);font-size:23px;opacity:.22}
+.f-9{top:22%;left:34%;transform:rotate(2deg);opacity:.18}
+@media (max-width:960px){
+  .paper-formulas .f-3,.paper-formulas .f-4,.paper-formulas .f-8,.paper-formulas .f-9{display:none}
 }
 .blob{
   position:absolute;border-radius:50%;filter:blur(60px);opacity:.55;z-index:-1;

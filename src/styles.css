@@ -78,8 +78,10 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 .btn-dark:hover{transform:translateY(-2px);background:#000}
 
 /* ============ SECTION COMMON ============ */
-.section-head{text-align:center;max-width:680px;margin:0 auto 64px}
-.eyebrow{display:inline-block;font-size:13px;font-weight:600;color:var(--primary);text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px}
+.section-head{text-align:center;max-width:620px;margin:0 auto 44px}
+.eyebrow{display:inline-block;font-size:12px;font-weight:600;color:var(--primary);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px}
+.section-head h2{font-size:clamp(28px,3.6vw,42px) !important}
+.section-head p{font-size:15px !important}
 h1,h2,h3,h4{font-family:var(--sans)}
 h1 em, h2 em, h3 em{font-family:var(--serif);font-weight:400;color:var(--secondary);padding-right:.05em}
 .section-head h2{font-size:clamp(32px,4.4vw,52px);font-weight:800;letter-spacing:-.03em;line-height:1.08;margin:0 0 16px}

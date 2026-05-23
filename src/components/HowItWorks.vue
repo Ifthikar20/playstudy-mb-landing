@@ -57,12 +57,12 @@ const reveal = (i) => ({
 </template>
 
 <style scoped>
-.how{padding:60px 24px 120px;max-width:1240px;margin:0 auto}
-.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;list-style:none;padding:0;margin:0}
+.how{padding:40px 24px 100px;max-width:1100px;margin:0 auto}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;list-style:none;padding:0;margin:0}
 .step{
   background:#fff;
-  border:1px solid var(--border);border-radius:24px;
-  padding:32px;position:relative;overflow:hidden;
+  border:1px solid var(--border);border-radius:18px;
+  padding:22px;position:relative;overflow:hidden;
   transition:box-shadow .5s;
 }
 .step:hover{box-shadow:var(--shadow-2)}
@@ -70,9 +70,9 @@ const reveal = (i) => ({
   font-size:14px;font-weight:700;color:var(--primary);
   background:rgba(255,107,26,.1);width:fit-content;padding:4px 10px;border-radius:999px;margin-bottom:16px;
 }
-.step h3{margin:0 0 8px;font-size:21px;font-weight:700;letter-spacing:-.01em}
-.step p{margin:0 0 24px;color:var(--text-2);font-size:15px}
-.step-vis{height:100px;border-radius:14px;background:var(--surface);padding:16px;display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap}
+.step h3{margin:0 0 6px;font-size:17px;font-weight:700;letter-spacing:-.01em}
+.step p{margin:0 0 16px;color:var(--text-2);font-size:13.5px;line-height:1.5}
+.step-vis{height:80px;border-radius:12px;background:var(--surface);padding:14px;display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap}
 
 .mini-input{background:#fff;border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:12.5px;color:var(--text-2);font-family:monospace}
 .step-vis-1 .mini-input{animation:slide 4s ease-in-out infinite}
