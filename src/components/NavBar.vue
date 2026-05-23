@@ -34,15 +34,14 @@ onBeforeUnmount(() => window.removeEventListener('scroll', onScroll));
     :transition="{ duration: 0.7, ease: [0.2, 0.8, 0.2, 1] }"
   >
     <a class="brand" href="#top" aria-label="PlayStudy home">
-      <span class="brand-mark" aria-hidden="true">
-        <span class="brand-dot"></span><span class="brand-dot"></span><span class="brand-dot"></span><span class="brand-dot"></span>
-      </span>
+      <img class="brand-logo" src="/main-logo.png" alt="" />
       <span class="brand-name">PlayStudy</span>
     </a>
     <div class="nav-links">
       <a href="#features">Features</a>
       <a href="#how">How it works</a>
-      <a href="#game">The Game</a>
+      <a href="#games">Games</a>
+      <a href="#game">Play</a>
     </div>
     <a class="btn btn-primary btn-sm" href="#download">Get the app</a>
   </motion.nav>
@@ -65,17 +64,12 @@ onBeforeUnmount(() => window.removeEventListener('scroll', onScroll));
 }
 .nav.scrolled{box-shadow:0 8px 30px rgba(0,0,0,.08)}
 .brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:-.01em}
-.brand-mark{
-  display:grid;grid-template-columns:1fr 1fr;gap:2px;
-  width:22px;height:22px;
-  border-radius:6px;overflow:hidden;
+.brand-logo{
+  width:26px;height:26px;object-fit:contain;
+  border-radius:7px;
   transition:transform .5s var(--ease);
 }
-.brand:hover .brand-mark{transform:rotate(45deg)}
-.brand-dot{display:block;background:var(--primary)}
-.brand-dot:nth-child(2){background:var(--secondary)}
-.brand-dot:nth-child(3){background:var(--primary-2)}
-.brand-dot:nth-child(4){background:var(--secondary-2)}
+.brand:hover .brand-logo{transform:rotate(-6deg) scale(1.08)}
 .brand-name{font-size:15px}
 .nav-links{display:flex;gap:22px;font-size:14px;color:var(--text-2)}
 .nav-links a{transition:color .2s}

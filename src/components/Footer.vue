@@ -2,9 +2,7 @@
   <footer class="foot">
     <div class="foot-inner">
       <div class="brand">
-        <span class="brand-mark">
-          <span class="brand-dot"></span><span class="brand-dot"></span><span class="brand-dot"></span><span class="brand-dot"></span>
-        </span>
+        <img class="brand-logo" src="/main-logo.png" alt="" />
         <span class="brand-name">PlayStudy</span>
       </div>
       <p>© 2026 PlayStudy. Made for curious minds.</p>
@@ -22,10 +20,6 @@
 .foot-links{display:flex;gap:18px;font-size:13.5px;color:var(--text-2)}
 .foot-links a:hover{color:var(--text)}
 .brand{display:flex;align-items:center;gap:10px;font-weight:700}
-.brand-mark{display:grid;grid-template-columns:1fr 1fr;gap:2px;width:22px;height:22px;border-radius:6px;overflow:hidden}
-.brand-dot{display:block;background:var(--primary)}
-.brand-dot:nth-child(2){background:var(--secondary)}
-.brand-dot:nth-child(3){background:var(--primary-2)}
-.brand-dot:nth-child(4){background:var(--secondary-2)}
+.brand-logo{width:26px;height:26px;object-fit:contain;border-radius:7px}
 .brand-name{font-size:15px}
 </style>

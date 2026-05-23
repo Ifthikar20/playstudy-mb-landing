@@ -29,7 +29,8 @@ const fadeUp = (delay = 0) => ({
       <div class="blob blob-2"></div>
       <div class="blob blob-3"></div>
     </div>
-    <div class="grid-bg" aria-hidden="true"></div>
+    <div class="paper-bg" aria-hidden="true"></div>
+    <div class="paper-fade" aria-hidden="true"></div>
 
     <div class="hero-inner">
       <div class="hero-copy">
@@ -37,8 +38,8 @@ const fadeUp = (delay = 0) => ({
           <span class="pill-dot"></span> New · AI-powered study sets
         </motion.span>
         <motion.h1 class="title" v-bind="fadeUp(0.15)">
-          Turn anything into a <br/>
-          study set, <em>beautifully</em>.
+          Learn anything, <br/>
+          <em>Playfully.</em>
         </motion.h1>
         <motion.p class="lede" v-bind="fadeUp(0.25)">
           Paste a link, drop a file, or type. PlayStudy spins up a <b>Summary</b>, a <b>Quiz</b>, and a <b>Guess-the-Word</b> mini-game in seconds — so learning actually sticks.
@@ -96,23 +97,29 @@ const fadeUp = (delay = 0) => ({
   overflow:hidden;
   isolation:isolate;
 }
-.grid-bg{
-  position:absolute;inset:0;
+.paper-bg{
+  position:absolute;inset:0;z-index:-2;
+  background-color:#FBFAF6;
   background-image:
-    linear-gradient(rgba(0,0,0,.04) 1px,transparent 1px),
-    linear-gradient(90deg, rgba(0,0,0,.04) 1px,transparent 1px);
-  background-size:48px 48px;
-  mask-image:radial-gradient(ellipse 80% 60% at 50% 30%, #000 30%, transparent 75%);
-  -webkit-mask-image:radial-gradient(ellipse 80% 60% at 50% 30%, #000 30%, transparent 75%);
-  z-index:-1;
+    linear-gradient(rgba(30,94,255,.12) 1px,transparent 1px),
+    linear-gradient(90deg, rgba(30,94,255,.12) 1px,transparent 1px),
+    linear-gradient(rgba(30,94,255,.06) 1px,transparent 1px),
+    linear-gradient(90deg, rgba(30,94,255,.06) 1px,transparent 1px);
+  background-size:80px 80px, 80px 80px, 16px 16px, 16px 16px;
+}
+.paper-fade{
+  position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(ellipse 90% 60% at 50% 110%, rgba(255,255,255,1) 30%, transparent 70%),
+    linear-gradient(180deg, rgba(255,255,255,.5) 0%, rgba(255,255,255,0) 40%, rgba(255,255,255,.85) 100%);
 }
 .blob{
   position:absolute;border-radius:50%;filter:blur(60px);opacity:.55;z-index:-1;
   animation:float 14s ease-in-out infinite;
 }
-.blob-1{width:520px;height:520px;background:#FF6B1A;top:-120px;left:-120px;opacity:.55}
-.blob-2{width:480px;height:480px;background:#1E5EFF;top:200px;right:-150px;animation-delay:-4s;opacity:.5}
-.blob-3{width:380px;height:380px;background:#FFB347;bottom:-100px;left:30%;animation-delay:-8s;opacity:.4}
+.blob-1{width:520px;height:520px;background:#FF6B1A;top:-160px;left:-160px;opacity:.28}
+.blob-2{width:480px;height:480px;background:#1E5EFF;top:160px;right:-180px;animation-delay:-4s;opacity:.22}
+.blob-3{width:340px;height:340px;background:#FFB347;bottom:-120px;left:35%;animation-delay:-8s;opacity:.18}
 @keyframes float{
   0%,100%{transform:translate(0,0) scale(1)}
   33%{transform:translate(40px,-30px) scale(1.08)}
@@ -149,9 +156,12 @@ const fadeUp = (delay = 0) => ({
   font-family:var(--serif);
   font-style:italic;
   font-weight:400;
-  background:linear-gradient(120deg,#FF6B1A,#1E5EFF);
+  font-size:1.18em;
+  line-height:.95;
+  letter-spacing:-.025em;
+  background:linear-gradient(120deg,#FF6B1A 0%,#FF8A3D 40%,#1E5EFF 100%);
   -webkit-background-clip:text;background-clip:text;color:transparent;
-  letter-spacing:-.02em;
+  padding-left:.04em;
 }
 .lede{
   font-size:clamp(16px,1.4vw,18.5px);color:var(--text-2);

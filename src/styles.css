@@ -33,6 +33,27 @@ em, .serif-italic{
   font-weight:400;
   letter-spacing:-.01em;
 }
+
+/* ---- Math-paper / engineering pad background ---- */
+.math-paper{
+  background-color:#FBFAF6;
+  background-image:
+    /* major lines every 80px (cm) */
+    linear-gradient(rgba(30,94,255,.10) 1px,transparent 1px),
+    linear-gradient(90deg, rgba(30,94,255,.10) 1px,transparent 1px),
+    /* minor lines every 16px (mm) */
+    linear-gradient(rgba(30,94,255,.05) 1px,transparent 1px),
+    linear-gradient(90deg, rgba(30,94,255,.05) 1px,transparent 1px);
+  background-size:80px 80px, 80px 80px, 16px 16px, 16px 16px;
+  background-position:-1px -1px, -1px -1px, -1px -1px, -1px -1px;
+}
+.math-paper-soft{
+  background-color:#ffffff;
+  background-image:
+    linear-gradient(rgba(30,94,255,.07) 1px,transparent 1px),
+    linear-gradient(90deg, rgba(30,94,255,.07) 1px,transparent 1px);
+  background-size:24px 24px;
+}
 img,svg{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
 button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
