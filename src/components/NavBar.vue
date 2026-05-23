@@ -67,9 +67,7 @@ onBeforeUnmount(() => window.removeEventListener('scroll', onScroll));
 .brand-logo{
   width:26px;height:26px;object-fit:contain;
   border-radius:7px;
-  transition:transform .5s var(--ease);
 }
-.brand:hover .brand-logo{transform:rotate(-6deg) scale(1.08)}
 .brand-name{font-size:15px}
 .nav-links{display:flex;gap:22px;font-size:14px;color:var(--text-2)}
 .nav-links a{transition:color .2s}

@@ -110,76 +110,30 @@ const reveal = (i) => ({
         </div>
         <h3>{{ f.title }}</h3>
         <p>{{ f.desc }}</p>
-
-        <div v-if="f.kind==='bars'" class="f-preview f-preview-1">
-          <span></span><span></span><span></span><span></span>
-        </div>
-        <div v-else-if="f.kind==='quiz'" class="f-preview f-preview-2">
-          <span>A</span><span class="hit">B</span><span>C</span><span>D</span>
-        </div>
-        <div v-else class="f-preview f-preview-3">
-          <span>P</span><span>L</span><span>A</span><span>Y</span>
-        </div>
       </motion.article>
     </div>
   </section>
 </template>
 
 <style scoped>
-.features{padding:100px 24px;max-width:1100px;margin:0 auto}
-.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.features{padding:80px 24px 100px;max-width:1100px;margin:0 auto}
+.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .feature{
-  position:relative;
   background:#fff;
   border:1px solid var(--border);
-  border-radius:18px;
-  padding:22px;
-  overflow:hidden;
-  transition:box-shadow .5s ease, border-color .5s;
+  border-radius:16px;
+  padding:24px;
+  transition:border-color .2s ease;
 }
-.feature::before{
-  content:"";position:absolute;inset:0;
-  background:radial-gradient(circle at 20% 0%, var(--c, #FF6B1A), transparent 60%);
-  opacity:0;transition:opacity .5s;
-}
-.feature:hover{box-shadow:var(--shadow-2);border-color:transparent}
-.feature:hover::before{opacity:.08}
+.feature:hover{border-color:var(--text)}
 .f-ic{
-  width:64px;height:64px;border-radius:14px;
+  width:56px;height:56px;border-radius:12px;
   background:#FBFAF6;
-  background-image:
-    linear-gradient(rgba(30,94,255,.07) 1px,transparent 1px),
-    linear-gradient(90deg, rgba(30,94,255,.07) 1px,transparent 1px);
-  background-size:12px 12px;
   border:1px solid var(--border);
-  color:var(--c);display:grid;place-items:center;margin-bottom:16px;
-  transition:transform .5s var(--ease), border-color .5s;
+  color:var(--c);display:grid;place-items:center;margin-bottom:18px;
 }
-.feature:hover .f-ic{transform:translateY(-2px);border-color:var(--c)}
 .feature h3{margin:0 0 6px;font-size:17px;font-weight:700;letter-spacing:-.01em}
-.feature p{margin:0;color:var(--text-2);font-size:13.5px;line-height:1.5}
-.f-preview{
-  margin-top:16px;height:64px;border-radius:12px;
-  background:var(--surface);padding:16px;
-  display:flex;align-items:center;justify-content:center;gap:8px;
-  position:relative;overflow:hidden;
-}
-.f-preview-1 span{height:6px;background:var(--c);border-radius:3px;display:block;animation:bar 2.4s var(--ease) infinite}
-.f-preview-1 span:nth-child(1){width:80px;animation-delay:0s}
-.f-preview-1 span:nth-child(2){width:60px;animation-delay:.15s;opacity:.7}
-.f-preview-1 span:nth-child(3){width:90px;animation-delay:.3s;opacity:.5}
-.f-preview-1 span:nth-child(4){width:50px;animation-delay:.45s;opacity:.3}
-@keyframes bar{0%,100%{transform:scaleX(.6)}50%{transform:scaleX(1)}}
-
-.f-preview-2 span{width:42px;height:42px;border-radius:10px;background:#fff;border:2px solid var(--border);display:grid;place-items:center;font-weight:700;font-size:14px}
-.f-preview-2 .hit{background:var(--c);color:#fff;border-color:var(--c);animation:popIn .8s var(--ease) infinite alternate}
-@keyframes popIn{from{transform:scale(.92)}to{transform:scale(1.06)}}
-
-.f-preview-3 span{width:42px;height:48px;background:#fff;border:2px solid var(--c);border-radius:8px;display:grid;place-items:center;font-weight:800;color:var(--c);animation:tileFlip 3s ease-in-out infinite}
-.f-preview-3 span:nth-child(2){animation-delay:.2s}
-.f-preview-3 span:nth-child(3){animation-delay:.4s}
-.f-preview-3 span:nth-child(4){animation-delay:.6s}
-@keyframes tileFlip{0%,80%,100%{transform:rotateY(0)}40%{transform:rotateY(180deg);background:var(--c);color:#fff}}
+.feature p{margin:0;color:var(--text-2);font-size:13.5px;line-height:1.55}
 
 @media (max-width:960px){.feature-grid{grid-template-columns:1fr}}
 </style>

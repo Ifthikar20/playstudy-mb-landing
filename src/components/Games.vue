@@ -215,10 +215,10 @@ const reveal = (i) => ({
 .rows{display:flex;flex-direction:column;gap:20px}
 .row{
   display:grid;grid-template-columns:1fr 1fr;gap:0;
-  background:#fff;border:1px solid var(--border);border-radius:18px;
-  overflow:hidden;transition:box-shadow .4s, border-color .4s;
+  background:#fff;border:1px solid var(--border);border-radius:16px;
+  overflow:hidden;transition:border-color .2s ease;
 }
-.row:hover{box-shadow:var(--shadow-1);border-color:#d8d2c8}
+.row:hover{border-color:var(--text)}
 .row.flip{direction:rtl}
 .row.flip > *{direction:ltr}
 

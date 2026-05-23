@@ -56,18 +56,8 @@ const fadeUp = (delay = 0) => ({
           Paste a link, drop a file, or type. PlayStudy spins up a <b>Summary</b>, a <b>Quiz</b>, and a <b>Guess-the-Word</b> mini-game in seconds — so learning actually sticks.
         </motion.p>
         <motion.div class="cta-row" v-bind="fadeUp(0.35)">
-          <motion.a class="btn btn-primary" href="#download"
-            :while-hover="{ y: -3, scale: 1.03 }"
-            :while-tap="{ scale: 0.97 }">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M16.5 12c0-2.6 2.1-3.8 2.2-3.9-1.2-1.7-3-2-3.7-2-1.6-.2-3 .9-3.8.9-.8 0-2-.9-3.3-.9-1.7 0-3.3 1-4.2 2.5-1.8 3.1-.5 7.6 1.3 10.1.9 1.2 1.9 2.6 3.2 2.5 1.3-.1 1.8-.8 3.3-.8 1.5 0 2 .8 3.3.8 1.4 0 2.3-1.2 3.1-2.4 1-1.4 1.4-2.7 1.4-2.8-.1 0-2.8-1.1-2.8-4zm-2.6-7.3c.7-.8 1.2-2 1-3.2-1.1.1-2.3.7-3 1.6-.7.7-1.3 2-1.1 3.1 1.2.1 2.4-.6 3.1-1.5z"/></svg>
-            Download for iOS
-          </motion.a>
-          <motion.a class="btn btn-ghost" href="#download"
-            :while-hover="{ y: -3 }"
-            :while-tap="{ scale: 0.97 }">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M3.6 2.3 14 12 3.6 21.7c-.4-.2-.6-.6-.6-1V3.3c0-.4.2-.8.6-1zm11.7 7.4 2.8-1.6c.6-.3.6-1.2 0-1.5L5.6 0 14 8.4l1.3 1.3z"/></svg>
-            Get on Android
-          </motion.a>
+          <a class="btn btn-primary" href="#download">Download for iOS</a>
+          <a class="btn btn-secondary" href="#download">Get on Android</a>
         </motion.div>
 
         <motion.div class="hero-stats" v-bind="fadeUp(0.5)">

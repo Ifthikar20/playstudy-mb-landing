@@ -79,9 +79,9 @@ const fadeUp = (i = 0) => ({
 .stat{
   background:#fff;border:1px solid var(--border);border-radius:16px;
   padding:20px;display:flex;flex-direction:column;gap:6px;
-  transition:box-shadow .4s, border-color .4s;
+  transition:border-color .2s ease;
 }
-.stat:hover{box-shadow:var(--shadow-1);border-color:#d8d2c8}
+.stat:hover{border-color:var(--text)}
 .stat-n{
   font-family:var(--serif);font-style:italic;font-weight:400;
   font-size:42px;line-height:1;letter-spacing:-.02em;

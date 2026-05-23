@@ -22,7 +22,7 @@ const reveal = (i) => ({
     </motion.div>
 
     <ol class="steps">
-      <motion.li class="step" v-bind="reveal(0)" :while-hover="{ y: -4 }">
+      <motion.li class="step" v-bind="reveal(0)">
         <div class="step-num">01</div>
         <h3>Drop the source</h3>
         <p>A link, a PDF, lecture notes — anything you'd normally read.</p>
@@ -51,7 +51,7 @@ const reveal = (i) => ({
         </div>
       </motion.li>
 
-      <motion.li class="step" v-bind="reveal(1)" :while-hover="{ y: -4 }">
+      <motion.li class="step" v-bind="reveal(1)">
         <div class="step-num">02</div>
         <h3>AI builds the set</h3>
         <p>Summary, quiz questions, and game words — generated together, in seconds.</p>
@@ -91,7 +91,7 @@ const reveal = (i) => ({
         </div>
       </motion.li>
 
-      <motion.li class="step" v-bind="reveal(2)" :while-hover="{ y: -4 }">
+      <motion.li class="step" v-bind="reveal(2)">
         <div class="step-num">03</div>
         <h3>Read · Recall · Play</h3>
         <p>Move through the three modes. Each one locks the material in a little deeper.</p>
@@ -130,14 +130,14 @@ const reveal = (i) => ({
 
 <style scoped>
 .how{padding:40px 24px 100px;max-width:1100px;margin:0 auto}
-.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;list-style:none;padding:0;margin:0}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;list-style:none;padding:0;margin:0}
 .step{
   background:#fff;
-  border:1px solid var(--border);border-radius:18px;
-  padding:22px;position:relative;overflow:hidden;
-  transition:box-shadow .5s;
+  border:1px solid var(--border);border-radius:16px;
+  padding:24px;
+  transition:border-color .2s ease;
 }
-.step:hover{box-shadow:var(--shadow-2)}
+.step:hover{border-color:var(--text)}
 .step-num{
   font-size:14px;font-weight:700;color:var(--primary);
   background:rgba(255,107,26,.1);width:fit-content;padding:4px 10px;border-radius:999px;margin-bottom:16px;
