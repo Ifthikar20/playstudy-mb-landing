@@ -53,9 +53,60 @@ const reveal = (i) => ({
         :while-hover="{ y: -8 }"
       >
         <div class="f-ic">
-          <svg v-if="f.kind==='bars'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="24" height="24"><path d="M4 5h16M4 12h16M4 19h10"/></svg>
-          <svg v-else-if="f.kind==='quiz'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="24" height="24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 4 2c-1 .8-1.5 1.3-1.5 2.5M12 17h.01"/></svg>
-          <svg v-else viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="24" height="24"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M8 12h.01M12 12h.01M16 12h.01"/></svg>
+          <!-- Smart Summary: a folded page with sketched ruled lines, a
+               highlighter swoosh, a serif sigma collapsing it down to one key line. -->
+          <svg v-if="f.kind==='bars'" viewBox="0 0 56 56" fill="none" stroke="currentColor" width="44" height="44" aria-hidden="true">
+            <!-- highlight stripe behind -->
+            <rect x="9" y="22" width="26" height="6" rx="3" fill="currentColor" opacity=".12"/>
+            <!-- page with folded corner -->
+            <path d="M12 8h22l8 8v28a2 2 0 0 1-2 2H12a2 2 0 0 1-2-2V10a2 2 0 0 1 2-2z" stroke-width="1.7" stroke-linejoin="round"/>
+            <path d="M34 8v8h8" stroke-width="1.7" stroke-linejoin="round"/>
+            <!-- sketchy ruled lines -->
+            <path d="M16 18h10" stroke-width="1.6" stroke-linecap="round"/>
+            <path d="M16 26h18" stroke-width="2.2" stroke-linecap="round"/>
+            <path d="M16 32c4 .4 8-.3 12 0 4 .3 8 0 10 .2" stroke-width="1.4" stroke-linecap="round" stroke-dasharray="2 3"/>
+            <path d="M16 38c5 .6 9-.4 14 .1" stroke-width="1.4" stroke-linecap="round" stroke-dasharray="2 3"/>
+            <!-- italic serif sigma badge -->
+            <text x="40" y="48" font-family="'Instrument Serif', serif" font-style="italic" font-size="18" fill="currentColor">Σ</text>
+          </svg>
+
+          <!-- Adaptive Quiz: a hand-drawn radio group with one ticked and a
+               branching arrow forking — represents "adaptive". -->
+          <svg v-else-if="f.kind==='quiz'" viewBox="0 0 56 56" fill="none" stroke="currentColor" width="44" height="44" aria-hidden="true">
+            <!-- three options drawn slightly askew -->
+            <circle cx="14" cy="14" r="5.5" stroke-width="1.7"/>
+            <circle cx="14" cy="30" r="5.5" stroke-width="1.7" fill="currentColor" fill-opacity=".14"/>
+            <circle cx="14" cy="30" r="2" fill="currentColor"/>
+            <circle cx="14" cy="46" r="5.5" stroke-width="1.7"/>
+            <!-- hand-drawn check next to the selected one -->
+            <path d="M22 28l3 4 8-9" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- branching adaptive arrow -->
+            <path d="M40 14c5 0 5 16 10 16" stroke-width="1.6" stroke-linecap="round" stroke-dasharray="2 3"/>
+            <path d="M40 46c5 0 5-16 10-16" stroke-width="1.6" stroke-linecap="round" stroke-dasharray="2 3"/>
+            <path d="M48 30l4-2v4z" fill="currentColor"/>
+          </svg>
+
+          <!-- Guess the Word: a row of dashed underlines with one filled
+               serif-italic letter, plus a tiny pencil mark above. -->
+          <svg v-else viewBox="0 0 56 56" fill="none" stroke="currentColor" width="44" height="44" aria-hidden="true">
+            <!-- pencil tick -->
+            <path d="M40 12l4-4 4 4-4 4z" stroke-width="1.6" stroke-linejoin="round"/>
+            <path d="M40 12l-4 4" stroke-width="1.6" stroke-linecap="round"/>
+            <!-- four letter slots -->
+            <g stroke-width="2" stroke-linecap="round">
+              <line x1="8" y1="40" x2="18" y2="40"/>
+              <line x1="22" y1="40" x2="32" y2="40"/>
+              <line x1="36" y1="40" x2="46" y2="40"/>
+            </g>
+            <!-- one revealed serif letter -->
+            <rect x="22" y="22" width="10" height="14" rx="2" fill="currentColor" fill-opacity=".14" stroke-width="1.7"/>
+            <text x="27" y="34" font-family="'Instrument Serif', serif" font-style="italic" font-size="14" font-weight="400" fill="currentColor" text-anchor="middle">a</text>
+            <!-- empty slot ghost letters as dotted boxes -->
+            <rect x="8" y="22" width="10" height="14" rx="2" stroke-width="1.4" stroke-dasharray="2 2"/>
+            <rect x="36" y="22" width="10" height="14" rx="2" stroke-width="1.4" stroke-dasharray="2 2"/>
+            <!-- caret -->
+            <path d="M40 22v-3" stroke-width="2" stroke-linecap="round"/>
+          </svg>
         </div>
         <h3>{{ f.title }}</h3>
         <p>{{ f.desc }}</p>
@@ -94,12 +145,17 @@ const reveal = (i) => ({
 .feature:hover{box-shadow:var(--shadow-2);border-color:transparent}
 .feature:hover::before{opacity:.08}
 .f-ic{
-  width:42px;height:42px;border-radius:12px;
-  background:color-mix(in srgb, var(--c) 12%, transparent);
+  width:64px;height:64px;border-radius:14px;
+  background:#FBFAF6;
+  background-image:
+    linear-gradient(rgba(30,94,255,.07) 1px,transparent 1px),
+    linear-gradient(90deg, rgba(30,94,255,.07) 1px,transparent 1px);
+  background-size:12px 12px;
+  border:1px solid var(--border);
   color:var(--c);display:grid;place-items:center;margin-bottom:16px;
-  transition:transform .5s var(--ease);
+  transition:transform .5s var(--ease), border-color .5s;
 }
-.feature:hover .f-ic{transform:rotate(-8deg) scale(1.05)}
+.feature:hover .f-ic{transform:translateY(-2px);border-color:var(--c)}
 .feature h3{margin:0 0 6px;font-size:17px;font-weight:700;letter-spacing:-.01em}
 .feature p{margin:0;color:var(--text-2);font-size:13.5px;line-height:1.5}
 .f-preview{
