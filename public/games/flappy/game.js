@@ -57,6 +57,7 @@
   var GRAVITY = 1500, FLAP = -480, SPEED = 165, GAP = 190, PIPE_W = 70, PIPE_EVERY = 1.6;
   var GROUND_H = 90;
   var bird, pipes, score, best = 0, spawnT, t, state, invuln, particles, clouds, revives;
+  var hillOffset = 0, cityOffset = 0, shake = 0;
 
   function reset() {
     bird = { x: W * 0.28, y: H * 0.4, vy: 0, r: 16, rot: 0 };
@@ -169,8 +170,11 @@
 
   // ---- Update + render ------------------------------------------------------
   function update(dt) {
-    // clouds drift always
+    // clouds + parallax layers drift always
     clouds.forEach(function (c) { c.x -= 18 * c.s * dt; if (c.x < -80) { c.x = W + 80; c.y = 40 + Math.random() * (H * 0.4); } });
+    cityOffset = (cityOffset + 22 * dt) % W;
+    hillOffset = (hillOffset + 40 * dt) % W;
+    if (shake > 0) shake -= dt;
 
     if (state !== 'play') return;
     t += dt;
@@ -211,8 +215,44 @@
     for (var i = 0; i < 16; i++) {
       particles.push({ x: bird.x, y: bird.y, vx: (Math.random() - 0.5) * 320, vy: (Math.random() - 0.5) * 320, life: 0.6, c: '#ffcf33' });
     }
+    shake = 0.4;
     if (QUIZ.length && revives < 3) { revives++; showQuiz(); }
     else { gameOver(); }
+  }
+
+  // Parallax city silhouette + rolling hills behind the play field.
+  function drawBackdrop() {
+    var horizon = H - GROUND_H;
+    // sun glow
+    ctx.save();
+    var sx = W * 0.78, sy = H * 0.22;
+    var sg = ctx.createRadialGradient(sx, sy, 8, sx, sy, 120);
+    sg.addColorStop(0, 'rgba(255,243,196,0.95)');
+    sg.addColorStop(1, 'rgba(255,243,196,0)');
+    ctx.fillStyle = sg;
+    ctx.beginPath(); ctx.arc(sx, sy, 120, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = '#fff3c4';
+    ctx.beginPath(); ctx.arc(sx, sy, 34, 0, Math.PI * 2); ctx.fill();
+    ctx.restore();
+
+    // distant city skyline (slow parallax)
+    ctx.fillStyle = 'rgba(120,160,200,0.45)';
+    var span = W + 120;
+    for (var bx = 0; bx < span; bx += 60) {
+      var bh = 60 + Math.abs(Math.sin(bx * 0.7)) * 90;
+      var x = ((bx - cityOffset) % span + span) % span - 60;
+      ctx.fillRect(x, horizon - bh, 46, bh);
+    }
+
+    // rolling hills (faster parallax)
+    ctx.fillStyle = '#8fd17a';
+    ctx.beginPath();
+    ctx.moveTo(0, horizon);
+    for (var hx = 0; hx <= W; hx += 20) {
+      var y = horizon - 40 - Math.sin((hx + hillOffset) * 0.012) * 26;
+      ctx.lineTo(hx, y);
+    }
+    ctx.lineTo(W, horizon); ctx.closePath(); ctx.fill();
   }
 
   function roundRect(x, y, w, h, r) {
@@ -226,10 +266,17 @@
   }
 
   function render() {
+    ctx.save();
+    if (shake > 0) {
+      var s = shake * 14;
+      ctx.translate((Math.random() - 0.5) * s, (Math.random() - 0.5) * s);
+    }
     // sky gradient
     var g = ctx.createLinearGradient(0, 0, 0, H);
-    g.addColorStop(0, '#4ec0f7'); g.addColorStop(1, '#bfe9ff');
+    g.addColorStop(0, '#4ec0f7'); g.addColorStop(0.7, '#9bd9fb'); g.addColorStop(1, '#bfe9ff');
     ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+
+    drawBackdrop();
 
     // clouds
     ctx.fillStyle = 'rgba(255,255,255,0.85)';
@@ -273,8 +320,14 @@
     if (invuln > 0) ctx.globalAlpha = 0.6 + 0.4 * Math.sin(t * 30);
     ctx.fillStyle = '#ffce3a';
     ctx.beginPath(); ctx.arc(0, 0, bird.r, 0, Math.PI * 2); ctx.fill();
-    ctx.fillStyle = '#ff9f1c'; // wing
-    ctx.beginPath(); ctx.ellipse(-4, 4, 9, 6, 0, 0, Math.PI * 2); ctx.fill();
+    ctx.save(); // animated flapping wing
+    var wingFlap = Math.sin(t * 18) * 0.6 - (bird.vy < 0 ? 0.5 : 0);
+    ctx.translate(-4, 2); ctx.rotate(wingFlap);
+    ctx.fillStyle = '#ff9f1c';
+    ctx.beginPath(); ctx.ellipse(0, 0, 10, 6, 0, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = '#ffb347';
+    ctx.beginPath(); ctx.ellipse(0, 0, 6, 3.5, 0, 0, Math.PI * 2); ctx.fill();
+    ctx.restore();
     ctx.fillStyle = '#fff'; // eye
     ctx.beginPath(); ctx.arc(7, -5, 5, 0, Math.PI * 2); ctx.fill();
     ctx.fillStyle = '#222';
@@ -296,6 +349,7 @@
       ctx.font = '600 20px -apple-system, sans-serif';
       ctx.fillText('Tap to flap', W / 2, H * 0.62);
     }
+    ctx.restore();
   }
 
   // ---- Loop -----------------------------------------------------------------

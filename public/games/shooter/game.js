@@ -44,14 +44,20 @@
   window.addEventListener('resize', resize);
   resize();
 
-  var ship, bullets, enemies, eBullets, stars, particles;
+  var ship, bullets, enemies, eBullets, stars, particles, nebulae;
   var score, best = 0, lives, wave, state, fireT, spawnT, toSpawn, t, bonuses;
+  var shake = 0, muzzle = 0;
 
   function reset() {
     ship = { x: W / 2, y: H - 90, w: 38, h: 30, cool: 0 };
     bullets = []; enemies = []; eBullets = []; particles = [];
     stars = [];
-    for (var i = 0; i < 90; i++) stars.push({ x: Math.random() * W, y: Math.random() * H, z: 0.3 + Math.random() * 1.4 });
+    for (var i = 0; i < 110; i++) stars.push({ x: Math.random() * W, y: Math.random() * H, z: 0.3 + Math.random() * 1.4, tw: Math.random() * Math.PI * 2 });
+    nebulae = [
+      { x: W * 0.25, y: H * 0.3, r: W * 0.45, c: 'rgba(90,40,160,0.30)' },
+      { x: W * 0.8, y: H * 0.65, r: W * 0.5, c: 'rgba(20,90,160,0.28)' },
+      { x: W * 0.55, y: H * 0.1, r: W * 0.35, c: 'rgba(160,30,90,0.22)' },
+    ];
     score = 0; lives = 3; wave = 0; fireT = 0; spawnT = 0; toSpawn = 0; t = 0; bonuses = 0;
     state = 'play';
     startWave();
@@ -124,8 +130,9 @@
 
   function explode(x, y, color, n) {
     for (var i = 0; i < (n || 14); i++) {
-      particles.push({ x: x, y: y, vx: (Math.random() - 0.5) * 320, vy: (Math.random() - 0.5) * 320, life: 0.5 + Math.random() * 0.3, c: color });
+      particles.push({ x: x, y: y, vx: (Math.random() - 0.5) * 320, vy: (Math.random() - 0.5) * 320, life: 0.5 + Math.random() * 0.3, c: color, r: 2 + Math.random() * 3 });
     }
+    shake = Math.min(0.5, shake + (n && n > 16 ? 0.35 : 0.15));
   }
 
   function gameOver() {
@@ -160,7 +167,9 @@
 
   function update(dt) {
     t += dt;
-    stars.forEach(function (st) { st.y += st.z * 60 * dt; if (st.y > H) { st.y = 0; st.x = Math.random() * W; } });
+    if (shake > 0) shake -= dt;
+    if (muzzle > 0) muzzle -= dt;
+    stars.forEach(function (st) { st.y += st.z * 60 * dt; st.tw += dt * 4; if (st.y > H) { st.y = 0; st.x = Math.random() * W; } });
     if (state !== 'play') return;
 
     if (keys['ArrowLeft']) ship.x -= 320 * dt;
@@ -169,7 +178,7 @@
 
     // auto-fire
     ship.cool -= dt;
-    if (ship.cool <= 0) { ship.cool = 0.22; bullets.push({ x: ship.x, y: ship.y - 20, vy: -560, w: 5, h: 14 }); }
+    if (ship.cool <= 0) { ship.cool = 0.22; bullets.push({ x: ship.x, y: ship.y - 20, vy: -560, w: 5, h: 14 }); muzzle = 0.08; }
 
     // spawn wave
     if (toSpawn > 0) {
@@ -217,6 +226,13 @@
 
   function drawShip() {
     ctx.save(); ctx.translate(ship.x, ship.y);
+    if (muzzle > 0) { // muzzle flash at the nose
+      ctx.globalAlpha = muzzle / 0.08;
+      var mg = ctx.createRadialGradient(0, -ship.h / 2, 0, 0, -ship.h / 2, 18);
+      mg.addColorStop(0, '#bff6ff'); mg.addColorStop(1, 'rgba(90,209,255,0)');
+      ctx.fillStyle = mg; ctx.beginPath(); ctx.arc(0, -ship.h / 2, 18, 0, Math.PI * 2); ctx.fill();
+      ctx.globalAlpha = 1;
+    }
     ctx.fillStyle = '#5ad1ff';
     ctx.beginPath();
     ctx.moveTo(0, -ship.h / 2);
@@ -233,20 +249,36 @@
   }
 
   function render() {
-    ctx.fillStyle = '#05060f'; ctx.fillRect(0, 0, W, H);
-    // stars
+    ctx.save();
+    if (shake > 0) {
+      var sh = shake * 16;
+      ctx.translate((Math.random() - 0.5) * sh, (Math.random() - 0.5) * sh);
+    }
+    ctx.fillStyle = '#05060f'; ctx.fillRect(-20, -20, W + 40, H + 40);
+
+    // nebula clouds
+    nebulae.forEach(function (n) {
+      var ng = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r);
+      ng.addColorStop(0, n.c); ng.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.fillStyle = ng; ctx.fillRect(-20, -20, W + 40, H + 40);
+    });
+
+    // twinkling stars
     stars.forEach(function (st) {
-      ctx.globalAlpha = 0.3 + st.z * 0.4;
+      ctx.globalAlpha = (0.3 + st.z * 0.4) * (0.6 + 0.4 * Math.sin(st.tw));
       ctx.fillStyle = '#cdd6ff';
       ctx.fillRect(st.x, st.y, st.z * 1.6, st.z * 1.6);
     });
     ctx.globalAlpha = 1;
 
-    // bullets
+    // bullets with glow
+    ctx.shadowColor = '#5ad1ff'; ctx.shadowBlur = 8;
     ctx.fillStyle = '#9af9ff';
     bullets.forEach(function (b) { ctx.fillRect(b.x - b.w / 2, b.y - b.h / 2, b.w, b.h); });
+    ctx.shadowColor = '#ff5a6e';
     ctx.fillStyle = '#ff7b8e';
     eBullets.forEach(function (b) { ctx.fillRect(b.x - b.w / 2, b.y - b.h / 2, b.w, b.h); });
+    ctx.shadowBlur = 0;
 
     // enemies
     enemies.forEach(function (en) {
@@ -264,8 +296,9 @@
 
     // particles
     particles.forEach(function (pt) {
+      var sz = pt.r || 3;
       ctx.globalAlpha = Math.max(0, pt.life * 1.8); ctx.fillStyle = pt.c;
-      ctx.fillRect(pt.x, pt.y, 4, 4); ctx.globalAlpha = 1;
+      ctx.fillRect(pt.x, pt.y, sz, sz); ctx.globalAlpha = 1;
     });
 
     drawShip();
@@ -280,6 +313,7 @@
       ctx.fillStyle = '#ff5a6e';
       ctx.beginPath(); ctx.arc(22 + i * 22, 56, 7, 0, Math.PI * 2); ctx.fill();
     }
+    ctx.restore();
   }
 
   var last = performance.now();
