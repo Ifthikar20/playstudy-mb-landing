@@ -28,7 +28,10 @@
   });
   try {
     var qp = new URLSearchParams(location.search).get('quiz');
-    if (qp) QUIZ = JSON.parse(decodeURIComponent(escape(atob(qp))));
+    if (qp) {
+      var b = qp.replace(/-/g, '+').replace(/_/g, '/');
+      QUIZ = JSON.parse(decodeURIComponent(escape(atob(b))));
+    }
   } catch (e) { /* ignore */ }
 
   var canvas = document.getElementById('game');
@@ -67,6 +70,16 @@
     wave++;
     toSpawn = 4 + wave * 2;
     spawnT = 0;
+  }
+
+  // Between waves: answer a question. Correct = bonus; then next wave begins.
+  function betweenWaves() {
+    if (!QUIZ.length) { startWave(); return; }
+    showQuiz(function (ok) {
+      if (ok) { score += 20; postToHost({ type: 'score', score: score }); }
+      state = 'play';
+      startWave();
+    }, 'Wave cleared!', 'Answer to launch the next wave');
   }
 
   function spawnEnemy() {
@@ -185,7 +198,7 @@
       spawnT -= dt;
       if (spawnT <= 0) { spawnEnemy(); toSpawn--; spawnT = 0.45; }
     } else if (enemies.length === 0) {
-      startWave();
+      betweenWaves();
     }
 
     for (var i = bullets.length - 1; i >= 0; i--) {

@@ -32,7 +32,10 @@
   // Fallback: quiz passed as ?quiz=<base64-json>
   try {
     var qp = new URLSearchParams(location.search).get('quiz');
-    if (qp) QUIZ = JSON.parse(decodeURIComponent(escape(atob(qp))));
+    if (qp) {
+      var b = qp.replace(/-/g, '+').replace(/_/g, '/');
+      QUIZ = JSON.parse(decodeURIComponent(escape(atob(b))));
+    }
   } catch (e) { /* ignore */ }
 
   // ---- Canvas setup ---------------------------------------------------------
@@ -57,7 +60,7 @@
   var GRAVITY = 1500, FLAP = -480, SPEED = 165, GAP = 190, PIPE_W = 70, PIPE_EVERY = 1.6;
   var GROUND_H = 90;
   var bird, pipes, score, best = 0, spawnT, t, state, invuln, particles, clouds, revives;
-  var hillOffset = 0, cityOffset = 0, shake = 0;
+  var hillOffset = 0, cityOffset = 0, shake = 0, nextQuizAt = 2;
 
   function reset() {
     bird = { x: W * 0.28, y: H * 0.4, vy: 0, r: 16, rot: 0 };
@@ -68,7 +71,7 @@
       { x: W * 0.6, y: H * 0.3, s: 0.7 },
       { x: W * 0.9, y: H * 0.12, s: 0.85 },
     ];
-    score = 0; spawnT = 0; t = 0; invuln = 0; revives = 0;
+    score = 0; spawnT = 0; t = 0; invuln = 0; revives = 0; nextQuizAt = 2;
     state = 'ready'; // ready | play | quiz | over
   }
   reset();
@@ -110,15 +113,16 @@
     return QUIZ[Math.floor(Math.random() * QUIZ.length)];
   }
 
-  function showQuiz() {
+  // Generic question overlay. Calls onResult(correct) once answered.
+  function askQuestion(title, sub, onResult) {
     var q = pickQuestion();
-    if (!q) { gameOver(); return; }
+    if (!q) { onResult(false); return; }
     state = 'quiz';
     card.innerHTML = '';
-    var h = document.createElement('h2'); h.textContent = 'Answer to revive';
-    var sub = document.createElement('p'); sub.className = 'sub'; sub.textContent = 'Get it right to keep flying';
+    var h = document.createElement('h2'); h.textContent = title;
+    var s = document.createElement('p'); s.className = 'sub'; s.textContent = sub;
     var prompt = document.createElement('div'); prompt.className = 'prompt'; prompt.textContent = q.prompt || '';
-    card.appendChild(h); card.appendChild(sub); card.appendChild(prompt);
+    card.appendChild(h); card.appendChild(s); card.appendChild(prompt);
     var choices = q.choices || [];
     var answered = false;
     choices.forEach(function (choice, idx) {
@@ -128,22 +132,31 @@
         if (answered) return; answered = true;
         var correct = idx === q.correctIndex;
         b.classList.add(correct ? 'correct' : 'wrong');
-        if (!correct && choices[q.correctIndex] !== undefined) {
-          card.children[3 + q.correctIndex] && card.children[3 + q.correctIndex].classList.add('correct');
-        }
+        if (!correct) { var cb = card.children[3 + q.correctIndex]; if (cb) cb.classList.add('correct'); }
         setTimeout(function () {
           hideOverlay();
-          if (correct) {
-            postToHost({ type: 'reward', reason: 'Super Dash checkpoint' });
-            revive();
-          } else {
-            gameOver();
-          }
-        }, 700);
+          if (correct) postToHost({ type: 'reward', reason: 'Super Dash checkpoint' });
+          onResult(correct);
+        }, 650);
       };
       card.appendChild(b);
     });
     overlay.classList.add('show');
+  }
+
+  // Mid-flight question (every few pipes). Correct = bonus + brief shield.
+  function showPlayQuestion() {
+    askQuestion('Quick question', 'Correct = bonus points + shield', function (correct) {
+      if (correct) { score += 2; postToHost({ type: 'score', score: score }); invuln = 1.4; }
+      bird.y = H * 0.4; bird.vy = 0; state = 'play';
+    });
+  }
+
+  // On crash: answer to revive, otherwise game over.
+  function showQuiz() {
+    askQuestion('Answer to revive', 'Get it right to keep flying', function (correct) {
+      if (correct) revive(); else gameOver();
+    });
   }
 
   function hideOverlay() { overlay.classList.remove('show'); }
@@ -190,7 +203,10 @@
     for (var i = pipes.length - 1; i >= 0; i--) {
       var p = pipes[i];
       p.x -= SPEED * dt;
-      if (!p.passed && p.x + PIPE_W < bird.x) { p.passed = true; score++; postToHost({ type: 'score', score: score }); }
+      if (!p.passed && p.x + PIPE_W < bird.x) {
+        p.passed = true; score++; postToHost({ type: 'score', score: score });
+        if (QUIZ.length && score >= nextQuizAt) { nextQuizAt = score + 3; showPlayQuestion(); return; }
+      }
       if (p.x + PIPE_W < -10) pipes.splice(i, 1);
       if (invuln <= 0 && hitsPipe(p)) { onCrash(); return; }
     }
