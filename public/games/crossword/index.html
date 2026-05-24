@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <title>PlayStudy — Crossword</title>
+  <style>
+    :root { color-scheme: light; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; height: 100%; background: #FFF8E7;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; color: #2D3436; }
+    #app { display: flex; flex-direction: column; height: 100vh; padding: 12px; gap: 10px; }
+    h1 { font-size: 18px; margin: 4px 2px; }
+    #gridWrap { display: flex; justify-content: center; }
+    #grid { display: grid; gap: 2px; }
+    .cell { position: relative; width: var(--cs, 30px); height: var(--cs, 30px); }
+    .cell.block { background: transparent; }
+    .cell input {
+      width: 100%; height: 100%; border: 1px solid #c9bd80; border-radius: 4px;
+      background: #fff; text-align: center; font-size: 16px; font-weight: 700;
+      text-transform: uppercase; color: #2D3436; padding: 0; caret-color: transparent;
+    }
+    .cell input:focus { outline: none; }
+    .cell.active input { background: #FFF3C4; border-color: #E6A700; }
+    .cell.word input { background: #FFFBEA; }
+    .cell.correct input { background: #e8f6f5; border-color: #008489; }
+    .cell.wrong input { background: #fbeae6; border-color: #c13515; }
+    .num { position: absolute; top: 0; left: 1px; font-size: 8px; font-weight: 700; color: #717171; }
+    #clues { flex: 1; overflow-y: auto; display: flex; gap: 16px; }
+    .col { flex: 1; }
+    .col h2 { font-size: 13px; text-transform: uppercase; letter-spacing: .5px; color: #717171; margin: 6px 0; }
+    .clue { font-size: 13px; padding: 6px 8px; border-radius: 8px; cursor: pointer; line-height: 1.35; }
+    .clue.sel { background: #FFF3C4; }
+    .clue.done { color: #008489; }
+    .bar { display: flex; gap: 8px; }
+    .btn { flex: 1; padding: 13px; border: none; border-radius: 12px; font-size: 15px; font-weight: 800; cursor: pointer; }
+    .btn.primary { background: linear-gradient(90deg,#E61E4D,#E31C5F,#D70466); color: #fff; }
+    .btn.ghost { background: #fff; border: 1px solid #ddd; color: #2D3436; }
+    .toast { position: fixed; left: 0; right: 0; bottom: 84px; text-align: center; pointer-events: none; }
+    .toast span { background: rgba(45,52,54,0.92); color: #fff; padding: 10px 16px; border-radius: 20px; font-size: 14px; }
+    .empty { margin: auto; text-align: center; color: #717171; padding: 24px; }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <h1>Crossword</h1>
+    <div id="gridWrap"><div id="grid"></div></div>
+    <div id="clues">
+      <div class="col"><h2>Across</h2><div id="across"></div></div>
+      <div class="col"><h2>Down</h2><div id="down"></div></div>
+    </div>
+    <div class="bar">
+      <button class="btn ghost" id="revealBtn">Reveal letter</button>
+      <button class="btn primary" id="checkBtn">Check</button>
+    </div>
+  </div>
+  <div class="toast" id="toast" style="display:none"><span id="toastMsg"></span></div>
+  <script src="./game.js"></script>
+</body>
+</html>
