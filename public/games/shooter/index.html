@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <title>PlayStudy — Space Shooter</title>
+  <style>
+    :root { color-scheme: dark; }
+    html, body { margin: 0; height: 100%; overflow: hidden; background: #05060f; }
+    #game { display: block; width: 100vw; height: 100vh; touch-action: none; }
+    .overlay {
+      position: fixed; inset: 0; display: none; align-items: center; justify-content: center;
+      background: rgba(0,0,0,0.55); padding: 20px; box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+    .overlay.show { display: flex; }
+    .card {
+      background: #15172b; border-radius: 20px; padding: 22px; max-width: 460px; width: 100%;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5); border: 1px solid #2a2d4a;
+    }
+    .card h2 { margin: 0 0 4px; font-size: 18px; color: #fff; }
+    .card p.sub { margin: 0 0 16px; font-size: 13px; color: #9aa0c2; }
+    .card .prompt { font-size: 17px; font-weight: 700; color: #fff; margin-bottom: 14px; }
+    .choice {
+      display: block; width: 100%; text-align: left; padding: 14px 16px; margin-bottom: 10px;
+      border: 1px solid #2a2d4a; border-radius: 12px; background: #1c1f38; font-size: 15px; color: #e9eaf6;
+      cursor: pointer;
+    }
+    .choice.correct { border-color: #00d39a; background: #0f3a31; }
+    .choice.wrong { border-color: #ff5a6e; background: #3a1620; }
+    .bigbtn {
+      display:inline-block; margin-top: 6px; padding: 14px 22px; border: none; border-radius: 12px;
+      background: linear-gradient(90deg,#E61E4D,#E31C5F,#D70466); color: #fff; font-size: 16px;
+      font-weight: 800; cursor: pointer; width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="game"></canvas>
+  <div class="overlay" id="overlay"><div class="card" id="card"></div></div>
+  <script src="./game.js"></script>
+</body>
+</html>
