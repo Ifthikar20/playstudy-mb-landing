@@ -80,6 +80,7 @@
     }
 
     put(entries[0], 0, 0, 'across');
+    var leftovers = [];
     for (var e = 1; e < entries.length; e++) {
       var w = entries[e].word, done = false;
       for (var pi = 0; pi < placed.length && !done; pi++) {
@@ -96,7 +97,18 @@
           }
         }
       }
-      // words that can't interlock are skipped, keeping the puzzle connected
+      if (!done) leftovers.push(entries[e]);
+    }
+    // Place words that couldn't interlock on their own rows below, so every
+    // clue still appears in the puzzle (just not crossing).
+    if (leftovers.length) {
+      var maxRow = 0;
+      Object.keys(grid).forEach(function (k) { maxRow = Math.max(maxRow, parseInt(k.split(',')[0], 10)); });
+      var freeRow = maxRow + 2;
+      leftovers.forEach(function (en) {
+        put(en, freeRow, 0, 'across');
+        freeRow += 2;
+      });
     }
     return placed;
   }
