@@ -48,7 +48,7 @@
   resize();
 
   var ship, bullets, enemies, eBullets, stars, particles, nebulae;
-  var score, best = 0, lives, wave, state, fireT, spawnT, toSpawn, t, bonuses;
+  var score, best = 0, lives, wave, state, fireT, spawnT, toSpawn, t, bonuses, answered;
   var shake = 0, muzzle = 0;
 
   function reset() {
@@ -61,7 +61,7 @@
       { x: W * 0.8, y: H * 0.65, r: W * 0.5, c: 'rgba(20,90,160,0.28)' },
       { x: W * 0.55, y: H * 0.1, r: W * 0.35, c: 'rgba(160,30,90,0.22)' },
     ];
-    score = 0; lives = 3; wave = 0; fireT = 0; spawnT = 0; toSpawn = 0; t = 0; bonuses = 0;
+    score = 0; lives = 3; wave = 0; fireT = 0; spawnT = 0; toSpawn = 0; t = 0; bonuses = 0; answered = 0;
     state = 'play';
     startWave();
   }
@@ -75,11 +75,14 @@
   // Between waves: answer a question. Correct = bonus; then next wave begins.
   function betweenWaves() {
     if (!QUIZ.length) { startWave(); return; }
+    answered++;
     showQuiz(function (ok) {
-      if (ok) { score += 20; postToHost({ type: 'score', score: score }); }
+      // requireCorrect: only reached when the answer is right.
+      score += 20; postToHost({ type: 'score', score: score });
       state = 'play';
       startWave();
-    }, 'Wave cleared!', 'Answer to launch the next wave');
+    }, 'Wave ' + wave + ' cleared!',
+       'Answer correctly to continue  ·  Q' + answered, true);
   }
 
   function spawnEnemy() {
@@ -111,7 +114,10 @@
   var card = document.getElementById('card');
   function pickQuestion() { return QUIZ.length ? QUIZ[Math.floor(Math.random() * QUIZ.length)] : null; }
 
-  function showQuiz(onResolve, title, sub) {
+  // requireCorrect=true: a wrong answer does NOT proceed — the player must
+  // answer correctly to advance (used to gate the next wave). When false
+  // (revive flow) a wrong answer resolves(false) and ends the run.
+  function showQuiz(onResolve, title, sub, requireCorrect) {
     var q = pickQuestion();
     if (!q) { onResolve(false); return; }
     state = 'quiz';
@@ -120,20 +126,33 @@
     var s = document.createElement('p'); s.className = 'sub'; s.textContent = sub || 'Correct = reward + shield';
     var prompt = document.createElement('div'); prompt.className = 'prompt'; prompt.textContent = q.prompt || '';
     card.appendChild(h); card.appendChild(s); card.appendChild(prompt);
-    var choices = q.choices || [], answered = false;
+    var choices = q.choices || [], locked = false;
     choices.forEach(function (choice, idx) {
       var b = document.createElement('button');
       b.className = 'choice'; b.textContent = choice;
       b.onclick = function () {
-        if (answered) return; answered = true;
+        if (locked) return;
         var correct = idx === q.correctIndex;
-        b.classList.add(correct ? 'correct' : 'wrong');
-        if (!correct) { var cb = card.children[3 + q.correctIndex]; if (cb) cb.classList.add('correct'); }
-        setTimeout(function () {
-          hideOverlay();
-          if (correct) postToHost({ type: 'reward', reason: 'Super Dash checkpoint' });
-          onResolve(correct);
-        }, 700);
+        if (correct) {
+          locked = true;
+          b.classList.add('correct');
+          setTimeout(function () {
+            hideOverlay();
+            postToHost({ type: 'reward', reason: 'Super Dash checkpoint' });
+            onResolve(true);
+          }, 600);
+        } else if (requireCorrect) {
+          // Can't proceed: mark wrong, disable just this option, let them retry.
+          b.classList.add('wrong');
+          b.style.pointerEvents = 'none';
+          s.textContent = 'Not quite — answer correctly to launch the next wave.';
+        } else {
+          locked = true;
+          b.classList.add('wrong');
+          var cb = card.children[3 + q.correctIndex];
+          if (cb) cb.classList.add('correct');
+          setTimeout(function () { hideOverlay(); onResolve(false); }, 700);
+        }
       };
       card.appendChild(b);
     });

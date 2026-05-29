@@ -510,7 +510,7 @@ function renderQuiz(){
   const bank=QBANK[level]||QBANK[1];
   const q=bank.qs[quizIdx];
   const total=bank.qs.length;
-  document.getElementById('qStep').textContent=`Question ${quizIdx+1} of ${total}`;
+  document.getElementById('qStep').textContent=`Question ${quizIdx+1} of ${total} · ${total-quizIdx-1} left`;
   document.getElementById('qScorePill').textContent=`+${quizPts} pts`;
   document.getElementById('qProgFill').style.width=((quizIdx)/total*100)+'%';
   document.getElementById('qCat').textContent=bank.cat;
@@ -528,20 +528,23 @@ function renderQuiz(){
   });
 }
 function ansQuiz(sel,correct,btn){
-  if(quizAnswered)return;quizAnswered=true;
-  const btns=document.querySelectorAll('.q-ans');btns.forEach(b=>b.style.pointerEvents='none');
+  if(quizAnswered)return; // already correct -> locked
   const fb=document.getElementById('qFeedback');
   if(sel===correct){
-    btn.classList.add('correct');fb.className='quiz-feedback-row success';fb.textContent='✓  Correct — well done!';
+    quizAnswered=true;
+    document.querySelectorAll('.q-ans').forEach(b=>b.style.pointerEvents='none');
+    btn.classList.add('correct');
+    fb.className='quiz-feedback-row success';fb.textContent='✓  Correct — well done!';
     quizPts+=25;quizResults.push(true);score+=25;
     postToHost({type:'reward',reason:'Super Dash checkpoint'});
+    document.getElementById('qScorePill').textContent=`+${quizPts} pts`;
+    document.getElementById('qNextBtn').disabled=false; // can proceed only now
   } else {
-    btn.classList.add('wrong');btns[correct].classList.add('correct');
-    fb.className='quiz-feedback-row fail';fb.textContent='✗  Not quite — the correct answer is highlighted above.';
-    quizResults.push(false);
+    // Miss => can't proceed. Mark wrong, block that option, keep trying.
+    btn.classList.add('wrong');btn.style.pointerEvents='none';
+    fb.className='quiz-feedback-row fail';
+    fb.textContent='✗  Not quite — pick the right answer to continue.';
   }
-  document.getElementById('qScorePill').textContent=`+${quizPts} pts`;
-  document.getElementById('qNextBtn').disabled=false;
 }
 function nextQuizQ(){
   quizIdx++;const bank=QBANK[level]||QBANK[1];
